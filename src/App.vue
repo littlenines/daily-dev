@@ -1,6 +1,6 @@
 <template>
   <DevHeader />
-  <router-view/>
+  <router-view />
 </template>
 <script>
 import DevHeader from '@/components/DevHeader.vue'
@@ -20,5 +20,10 @@ html {
 
 body {
     background-color: $background-primary;
+}
+
+.container {
+  width: 100%;
+  max-width: 320px;
 }
 </style>

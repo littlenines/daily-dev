@@ -18,9 +18,10 @@ export default {
 
 <style lang='scss' scoped>
   .header {
-    background-color: $background-primary;
-    border-bottom: 1px solid $divider;
     padding: 15px 20px;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid $divider;
+    background-color: $background-primary;
   }
   
   .icon-color {
