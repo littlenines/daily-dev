@@ -1,19 +1,25 @@
 <template>
-  <button :class="['btn', btnSize]">
-    <font-awesome-icon  v-if="isIconLeft" :icon="iconLeft" :class="iconSize" />
+  <button :class="['btn', btnSize, {block}, variantClass]">
+    <font-awesome-icon  v-if="isIconLeft" :icon="iconLeft"  :size="iconSize"/>
     &ensp;<slot>Add</slot>&ensp;
-    <font-awesome-icon  v-if="isIconRight" :icon="iconRight" :class="iconSize" />
+    <font-awesome-icon  v-if="isIconRight" :icon="iconRight" :size="iconSize" />
   </button>
 </template>
 
 <script>
 export default {
     props: {
+        variant: {
+            type: String,
+            default: 'default'
+        },
         isIconLeft: {
-            type: Boolean
+            type: Boolean,
+            default: false
         },
         isIconRight: {
-            type: Boolean
+            type: Boolean,
+            default: false
         },
         iconLeft: {
             type: String
@@ -23,11 +29,25 @@ export default {
         },
         iconSize: {
             type: String,
-            default: ''
+            default: 'sm',
+            validator: (value) => {
+                const fontSizes = ['xs','sm', 'lg', '2x', '3x', '5x','7x', '10x']
+                return fontSizes.indexOf(value) > -1
+            }
         },
         btnSize: {
             type: String,
-            default: 'btn-small'
+            default: 'sm',
+            validator: (value) => ['sm','md','lg'].indexOf(value) > -1
+        },
+        block: {
+            type: Boolean,
+            default: false
+        }
+    },
+    computed: {
+        variantClass () {
+            return 'btn-' + this.$props.variant
         }
     }
 }
@@ -36,31 +56,52 @@ export default {
 <style lang="scss" scoped>
 .btn {
     border: none;
-    font-size: 1.5rem;
-    font-weight: 700;
     cursor: pointer;
-    background-color: $button-default;
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
 
-    &:hover {
-        background-color: $button-hover;
-        box-shadow: $button-hover-shadow;
-    }
-
-    &-small,
-    &-medium,
-    &-large {
+    &.sm,
+    &.md,
+    &.lg {
         height: 3.2rem;
         padding: 0 1.5rem;
         border-radius: 1rem;
     }
 
-    &-medium {
+    &.md {
         height: 4rem;
+        padding: 0 2.3rem;
     }
 
-    &-large {
+    &.lg {
         height: 4.5rem;
     }
+
+    &.block {
+        width: 100%;
+    }
+
+    &-default {
+        background-color: $button-default;
+
+     &:hover {
+        background-color: $button-hover;
+        box-shadow: $button-hover-shadow;
+     }
+    }
+
+    &-transparent {
+        background-color: transparent;
+        color: $label-tertiary;
+
+     &:hover {
+        background-color: $button-hover-transparent;
+        color: $white;
+     }
+    }
+    
 }
 
 </style>
