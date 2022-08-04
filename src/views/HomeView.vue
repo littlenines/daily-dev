@@ -21,6 +21,8 @@
                    {{ transparentButtonTitle }}
         </DevButton>
       </div>
+
+      <DevCard />
     </div>
   </main>
 </template>
@@ -28,11 +30,13 @@
 <script>
 // @ is an alias to /src
 import DevButton from '@/components/DevButton.vue'
+import DevCard from '@/components/DevCard.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    DevButton
+    DevButton,
+    DevCard
   },
   data () {
     return {
@@ -75,6 +79,7 @@ export default {
   .popular {
     display: flex;
     align-items: center;
+    margin-bottom: 3rem;
   }
 
   .popular-title {
