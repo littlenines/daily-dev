@@ -1,0 +1,42 @@
+[
+    {
+        "image": "/img/better.webp",
+        "title": "How to Use Kotlin Symbol Processors on Android",
+        "date": "Today",
+        "time": "4m",
+        "hero": "/img/arrow.jpg",
+        "iconStart": "fa-solid fa-angles-up",
+        "iconMiddle": "fa-regular fa-message",
+        "iconEnd": "fa-regular fa-bookmark",
+        "promoted": false
+    },
+    {
+        "image": "/img/logo-card.webp",
+        "title": "We’re meeting once a month to watch world-class talks! Join our meetup group to stay in the loop.",
+        "hero": "/img/hero.jpg",
+        "iconStart": "fa-solid fa-angles-up",
+        "iconMiddle": "fa-regular fa-message",
+        "iconEnd": "fa-regular fa-bookmark",
+        "promoted": true
+    },
+    {
+        "image": "/img/wunder.webp",
+        "title": "Why not use GraphQL?",
+        "date": "Jul 28, 2022",
+        "time": "15m",
+        "hero": "/img/graphql.webp",
+        "iconStart": "fa-solid fa-angles-up",
+        "iconMiddle": "fa-regular fa-message",
+        "iconEnd": "fa-regular fa-bookmark",
+        "promoted": false
+    },
+    {
+        "image": "/img/logo-card.webp",
+        "title": "Start us on GitHub to support our open-source repo!",
+        "hero": "/img/git.jpg",
+        "iconStart": "fa-solid fa-angles-up",
+        "iconMiddle": "fa-regular fa-message",
+        "iconEnd": "fa-regular fa-bookmark",
+        "promoted": true
+    }
+]

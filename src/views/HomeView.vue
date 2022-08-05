@@ -21,8 +21,21 @@
                    {{ transparentButtonTitle }}
         </DevButton>
       </div>
-
-      <DevCard />
+      
+      <div v-for="(card, index) in cards" :key="index">
+        <a href=""> 
+          <DevCard :image="card.image"
+                   :title="card.title"
+                   :date="card.date"
+                   :time="card.time"
+                   :hero="card.hero"
+                   :iconStart="card.iconStart"
+                   :iconMiddle="card.iconMiddle"
+                   :iconEnd="card.iconEnd"
+                   :promoted="card.promoted" 
+                   class="card-space"/>
+        </a>
+      </div>
     </div>
   </main>
 </template>
@@ -31,6 +44,7 @@
 // @ is an alias to /src
 import DevButton from '@/components/DevButton.vue'
 import DevCard from '@/components/DevCard.vue'
+import cards from '../../cards.json'
 
 export default {
   name: 'HomeView',
@@ -40,11 +54,12 @@ export default {
   },
   data () {
     return {
+      cards,
       cardButtonTitle: "Choose tags",
       cardTitle: 'Get the content you need by creating a personal feed',
       iconButton: "fa-solid fa-plus",
       iconSize: 'lg',
-      transparentButtonTitle: 'Add shortcuts'
+      transparentButtonTitle: 'Add shortcuts',
     }
   }
 }
@@ -88,5 +103,9 @@ export default {
     font-size: 1.7rem;
     line-height: 2.4rem;
     font-weight: 700;
+  }
+
+  .card-space {
+    margin-bottom: 3.2rem;
   }
 </style>

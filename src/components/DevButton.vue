@@ -56,10 +56,10 @@ export default {
 <style lang="scss" scoped>
 .btn {
     border: none;
+    display: flex;
     cursor: pointer;
     font-weight: 700;
     font-size: 1.5rem;
-    display: flex;
     align-items: center;
 
     &.sm,
@@ -93,15 +93,14 @@ export default {
     }
 
     &-transparent {
-        background-color: transparent;
         color: $label-tertiary;
+        background-color: transparent;
 
      &:hover {
-        background-color: $button-hover-transparent;
         color: $white;
+        background-color: $button-hover-transparent;
      }
     }
     
 }
-
 </style>

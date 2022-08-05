@@ -1,10 +1,31 @@
 <template>
   <div class="card">
-    <div class="card-header">
-      <a class="image-wrapper" href="/">
-        <img src="@/assets/logo-card.webp" alt="">
-      </a>
-      <DevIcon :icon="'fa-solid fa-ellipsis-vertical'" :size="'2x'"/>
+    <div v-if="!promoted" class="card-header">
+      <slot name="header">
+        <a class="image-wrapper" href="/">
+          <img :src="image" alt="logo">
+        </a>
+        <DevIcon :icon="icon" :size="'2x'"/>
+      </slot>
+    </div>
+    <div class="card-info">
+      <slot name="info">
+        <h3 class="card-info-title">{{ title }}</h3>
+        <p v-if="date" class="card-info-subtitle">{{ date }} &bullet; {{ time }} read time</p>
+      </slot>
+    </div>
+    <div class="card-image">
+      <img :src="hero" alt="hero">
+    </div>
+    <div v-if="!promoted" class="card-footer">
+      <slot name="footer">
+        <DevIcon :icon="iconStart" :size="size" :variant="success"/>
+        <DevIcon :icon="iconMiddle" :size="size" :variant="success"/>
+        <DevIcon :icon="iconEnd" :size="size" :variant="warning"/>
+      </slot>
+    </div>
+    <div v-else class="card-promoted">
+      <p>{{ promotedTitle }}</p>
     </div>
   </div>
 </template>
@@ -14,6 +35,54 @@ import DevIcon from '@/components/DevIcon.vue'
 export default {
   components: {
     DevIcon
+  },
+  props: {
+    image: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: 'fa-solid fa-ellipsis-vertical'
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    date: {
+      type: String,
+      default: ''
+    },
+    time: {
+      type: String,
+      default: ''
+    },
+    hero: {
+      type: String,
+      default: '',
+      required: true
+    },
+    promoted: {
+      type: Boolean,
+      default: false
+    },
+    iconStart: {
+      type: String
+    },
+    iconMiddle: {
+      type: String
+    },
+    iconEnd: {
+      type: String
+    }
+  },
+  data () {
+    return {
+      promotedTitle: 'Promoted',
+      success: 'success',
+      warning: 'warning',
+      size: '2x'
+    }
   }
 
 }
@@ -21,26 +90,78 @@ export default {
 
 <style lang="scss" scoped>
   .card {
-    border: 1px solid $divider;
-    border-radius: 1.6rem;
     padding: .8rem;
+    border-radius: 1.6rem;
+    box-shadow: $card-shadow;
+    border: 1px solid $divider;
     background-color: $background-secondary;
 
     &:hover {
       border-color: $divider-secondary;
     }
+
+    &-info-title {
+      color: $white;
+     font-size: 2rem;
+     font-weight: 700;
+     line-height: 2.6rem; 
+     word-break: break-word;
+    }
   }
 
   .card-header {
-    padding: 0 1.6rem;
     display: flex;
+    margin: .8rem 0;
+    padding: 0 1.6rem;
     align-items: center;
     justify-content: space-between;
+
+    img {
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 2rem;
+    }
   }
 
-  img {
-    width: 3.2rem;
-    height: 3.2rem;
-    border-radius: 2rem;
+  .card-info {
+    padding: 0 1.6rem;
+
+    &-title {
+      margin-bottom: .8rem;
+    }
+
+  }
+
+  .card-info-subtitle {
+    font-size: 1.3rem;
+    line-height: 1.8rem;
+    margin-bottom: 3.2rem;
+    color: $label-tertiary;
+  }
+
+  .card-image {
+    margin: 1rem 0;
+
+    img {
+      width: 100%;
+      height: 16rem;
+      object-fit: cover;
+      border-radius: 1.2rem;
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    padding: 0 1.6rem;
+    justify-content: space-between;
+
+  }
+
+  .card-promoted {
+    margin: .8rem 0;
+    font-size: 1.3rem;
+    padding: 0 1.6rem;
+    line-height: 1.8rem;
+    color: $label-tertiary;
   }
 </style>

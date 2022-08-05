@@ -1,12 +1,19 @@
-$background-primary: #0e1217;
-$background-secondary: #1c1f26;
 $white: #fff;
 $black: #000;
-$button-default: #ce3df3;
+$success: #39e58c;
+$warning: #ff8e3b;
+$success-hover: rgba(29,220,111,0.23921568627450981);
+$warning-hover: rgba(255,122,43,0.23921568627450981);
+
 $button-hover: #d74cf6;
-$button-hover-transparent: rgba(168,179,207,0.12156862745098039);
-$button-hover-shadow: 0 14px 14px -6px rgba(192,41,240,0.6392156862745098);
-$default-shadow: 0 6px 6px -2px rgba(192,41,240,0.4);
+$button-default: #ce3df3;
+
 $label-tertiary: #a8b3cf;
+$background-primary: #0e1217;
+$background-secondary: #1c1f26;
 $divider: rgba(168,179,207,0.2); 
 $divider-secondary: rgba(168,179,207,0.4); 
+$card-shadow: 0 6px 6px -2px rgba(0,0,0,0.4);
+$default-shadow: 0 6px 6px -2px rgba(192,41,240,0.4);
+$button-hover-transparent: rgba(168,179,207,0.12156862745098039);
+$button-hover-shadow: 0 14px 14px -6px rgba(192,41,240,0.6392156862745098);

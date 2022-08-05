@@ -1,6 +1,6 @@
 <template>
   <button :class="['icon', variantClass, iconSize]">
-    <font-awesome-icon   :icon="icon" :size="size" />
+    <font-awesome-icon :icon="icon" :size="size" />
   </button>
 </template>
 
@@ -39,19 +39,38 @@ export default {
 <style lang="scss" scoped>
     .icon {
         border: none;
+        cursor: pointer;
         &.sm {
+            padding: 0;
             width: 3.2rem;
             height: 3.2rem;
-            padding: 0;
             border-radius: 1rem;
         }
 
         &-default {
-            background-color: transparent;
             color: $label-tertiary;
+            background-color: transparent;
             &:hover {
-                background-color: $button-hover-transparent;
                 color: $white;
+                background-color: $button-hover-transparent;
+            }
+        }
+
+        &-success {
+            color: $label-tertiary;
+            background-color: transparent;
+            &:hover {
+                color: $success;
+                background-color: $success-hover;
+            }
+        }
+
+        &-warning {
+            color: $label-tertiary;
+            background-color: transparent;
+            &:hover {
+                color: $warning;
+                background-color: $warning-hover;
             }
         }
     }
