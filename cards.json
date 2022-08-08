@@ -8,7 +8,8 @@
         "iconStart": "fa-solid fa-angles-up",
         "iconMiddle": "fa-regular fa-message",
         "iconEnd": "fa-regular fa-bookmark",
-        "promoted": false
+        "promoted": false,
+        "icoLabel": ["105", "5", "1"]
     },
     {
         "image": "/img/logo-card.webp",
@@ -28,7 +29,8 @@
         "iconStart": "fa-solid fa-angles-up",
         "iconMiddle": "fa-regular fa-message",
         "iconEnd": "fa-regular fa-bookmark",
-        "promoted": false
+        "promoted": false,
+        "icoLabel": ["18", "", ""]
     },
     {
         "image": "/img/logo-card.webp",

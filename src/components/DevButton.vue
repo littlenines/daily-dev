@@ -1,9 +1,17 @@
 <template>
-  <button :class="['btn', btnSize, {block}, variantClass]">
-    <font-awesome-icon  v-if="isIconLeft" :icon="iconLeft"  :size="iconSize"/>
+  <!-- BUTTON -->
+  <button v-if="!icon" :class="['btn', size, variantButton, { block }]">
+    <font-awesome-icon  v-if="iconStart" :icon="iconStart"  :size="iconSize"/>
     &ensp;<slot>Add</slot>&ensp;
-    <font-awesome-icon  v-if="isIconRight" :icon="iconRight" :size="iconSize" />
+    <font-awesome-icon  v-if="iconEnd" :icon="iconEnd" :size="iconSize" />
   </button>
+  <!-- ICON -->
+  <div v-else class="btn-icon">
+    <button :class="['icon', variantIcon, size]" id="icon">
+        <font-awesome-icon :icon="ico" :size="iconSize" />
+    </button>
+    <label for="icon" v-if="label" :class="['label',variantLabel]">{{ label }}</label>
+  </div>
 </template>
 
 <script>
@@ -11,20 +19,15 @@ export default {
     props: {
         variant: {
             type: String,
-            default: 'default'
+            default: 'default',
+            validator: (value) => {
+                return ['default', 'success', 'warning'].indexOf(value) > -1
+            }
         },
-        isIconLeft: {
-            type: Boolean,
-            default: false
-        },
-        isIconRight: {
-            type: Boolean,
-            default: false
-        },
-        iconLeft: {
+        iconStart: {
             type: String
         },
-        iconRight: {
+        iconEnd: {
             type: String
         },
         iconSize: {
@@ -35,7 +38,7 @@ export default {
                 return fontSizes.indexOf(value) > -1
             }
         },
-        btnSize: {
+        size: {
             type: String,
             default: 'sm',
             validator: (value) => ['sm','md','lg'].indexOf(value) > -1
@@ -43,11 +46,27 @@ export default {
         block: {
             type: Boolean,
             default: false
+        },
+        icon: {
+            type: Boolean,
+            default: false
+        },
+        ico: {
+            type: String
+        },
+        label: {
+            type: String
         }
     },
     computed: {
-        variantClass () {
+        variantButton () {
             return 'btn-' + this.$props.variant
+        },
+        variantIcon () {
+            return 'icon-' + this.$props.variant
+        },
+        variantLabel () {
+            return 'label-' + this.$props.variant
         }
     }
 }
@@ -101,6 +120,66 @@ export default {
         background-color: $button-hover-transparent;
      }
     }
-    
+}
+
+.btn-icon {
+    display: flex;
+    align-items: center;
+    color: $label-tertiary;
+
+    &:hover .icon-default {
+        color: $white;
+        background-color: $button-hover-transparent;
+    }
+
+    &:hover .icon-success {
+        color: $success;
+        background-color: $success-hover;
+    }
+
+    &:hover .icon-warning {
+        color: $warning;
+        background-color: $warning-hover;
+    }
+
+    &:hover .label-default {
+        color: $white;
+    }
+
+    &:hover .label-warning {
+        color: $warning;
+    }
+
+    &:hover .label-success {
+        color: $success;
+    }
+
+    .icon {
+        border: none;
+        cursor: pointer;
+        color: $label-tertiary;
+        background-color: transparent;
+
+        &.sm,
+        &.md {
+            padding: 0;
+            width: 3.2rem;
+            height: 3.2rem;
+            border-radius: 1rem;
+        }
+
+        &.md {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 1.2rem;
+        }
+    }
+
+    .label {
+        font-weight: 700;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        padding-left: .5rem;
+    }
 }
 </style>

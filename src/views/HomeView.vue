@@ -3,27 +3,25 @@
     <div class="container">
       <div class="tag-card">
         <p class="tag-card-title">{{ cardTitle }}</p>
-        <DevButton isIconLeft
-                   :iconLeft="iconButton"
+        <DevButton :iconStart="iconButton"
                    :iconSize="iconSize"
-                   :variant="'default'">
+                   :variant="tagVariant">
                    {{ cardButtonTitle }}
         </DevButton>
       </div>
 
       <div class="popular">
-        <h3 class="popular-title">Popular</h3>
-        <DevButton isIconRight 
-                   :iconRight="iconButton"
+        <h3 class="popular-title">{{ popularTitle }}</h3>
+        <DevButton :iconEnd="iconButton"
                    :iconSize="iconSize"
-                   :btnSize="'md'"
-                   :variant="'transparent'">
+                   :size="shortcutIconSize"
+                   :variant="popularVariant">
                    {{ transparentButtonTitle }}
         </DevButton>
       </div>
       
       <div v-for="(card, index) in cards" :key="index">
-        <a href=""> 
+        <a href="/"> 
           <DevCard :image="card.image"
                    :title="card.title"
                    :date="card.date"
@@ -32,7 +30,8 @@
                    :iconStart="card.iconStart"
                    :iconMiddle="card.iconMiddle"
                    :iconEnd="card.iconEnd"
-                   :promoted="card.promoted" 
+                   :promoted="card.promoted"
+                   :iconLabel="card.icoLabel" 
                    class="card-space"/>
         </a>
       </div>
@@ -55,11 +54,15 @@ export default {
   data () {
     return {
       cards,
-      cardButtonTitle: "Choose tags",
-      cardTitle: 'Get the content you need by creating a personal feed',
-      iconButton: "fa-solid fa-plus",
       iconSize: 'lg',
+      tagVariant: 'default',
+      shortcutIconSize: 'md',
+      popularTitle: 'Popular',
+      popularVariant: 'transparent',
+      cardButtonTitle: "Choose tags",
+      iconButton: "fa-solid fa-plus",
       transparentButtonTitle: 'Add shortcuts',
+      cardTitle: 'Get the content you need by creating a personal feed'
     }
   }
 }

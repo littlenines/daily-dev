@@ -5,7 +5,7 @@
         <a class="image-wrapper" href="/">
           <img :src="image" alt="logo">
         </a>
-        <DevIcon :icon="icon" :size="'2x'"/>
+        <DevButton icon :ico="ico" :iconSize="size"/>
       </slot>
     </div>
     <div class="card-info">
@@ -19,9 +19,9 @@
     </div>
     <div v-if="!promoted" class="card-footer">
       <slot name="footer">
-        <DevIcon :icon="iconStart" :size="size" :variant="success"/>
-        <DevIcon :icon="iconMiddle" :size="size" :variant="success"/>
-        <DevIcon :icon="iconEnd" :size="size" :variant="warning"/>
+        <DevButton icon :ico="iconStart" :iconSize="size" :variant="success" :label="iconLabel[0]"/>
+        <DevButton icon :ico="iconMiddle" :iconSize="size" :variant="success" :label="iconLabel[1]"/>
+        <DevButton icon :ico="iconEnd" :iconSize="size" :variant="warning" :label="iconLabel[2]"/>
       </slot>
     </div>
     <div v-else class="card-promoted">
@@ -31,17 +31,17 @@
 </template>
 
 <script>
-import DevIcon from '@/components/DevIcon.vue'
+import DevButton from '@/components/DevButton.vue'
 export default {
   components: {
-    DevIcon
+    DevButton
   },
   props: {
     image: {
       type: String,
       default: ''
     },
-    icon: {
+    ico: {
       type: String,
       default: 'fa-solid fa-ellipsis-vertical'
     },
@@ -74,6 +74,9 @@ export default {
     },
     iconEnd: {
       type: String
+    },
+    iconLabel: {
+      type: Array
     }
   },
   data () {
@@ -101,7 +104,7 @@ export default {
     }
 
     &-info-title {
-      color: $white;
+     color: $white;
      font-size: 2rem;
      font-weight: 700;
      line-height: 2.6rem; 
@@ -154,7 +157,6 @@ export default {
     display: flex;
     padding: 0 1.6rem;
     justify-content: space-between;
-
   }
 
   .card-promoted {
