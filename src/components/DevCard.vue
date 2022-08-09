@@ -2,7 +2,7 @@
   <div class="card">
     <div v-if="!promoted" class="card-header">
       <slot name="header">
-        <a class="image-wrapper" href="/">
+        <a href="/">
           <img :src="image" alt="logo">
         </a>
         <DevButton icon :ico="ico" :iconSize="size"/>
@@ -81,10 +81,10 @@ export default {
   },
   data () {
     return {
-      promotedTitle: 'Promoted',
+      size: '2x',
       success: 'success',
       warning: 'warning',
-      size: '2x'
+      promotedTitle: 'Promoted'
     }
   }
 

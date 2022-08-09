@@ -10,17 +10,19 @@ import { faCode } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { faAnglesUp } from '@fortawesome/free-solid-svg-icons'
+import { faGear } from '@fortawesome/free-solid-svg-icons'
 
 import { faMessage } from '@fortawesome/free-regular-svg-icons'
 import { faBookmark } from '@fortawesome/free-regular-svg-icons'
 
 library.add(faBars,
-    faCode,
-    faPlus,
-    faEllipsisVertical,
-    faAnglesUp,
-    faMessage,
-    faBookmark)
+            faCode,
+            faPlus,
+            faEllipsisVertical,
+            faAnglesUp,
+            faMessage,
+            faBookmark,
+            faGear)
 
 createApp(App)
 .component('font-awesome-icon', FontAwesomeIcon)

@@ -1,21 +1,36 @@
 <template>
   <main class="main">
+<aside class="overlay">
+  <nav class="navigation">
+    <div class="navigation-header">
+        <div class="navigation-header-user">
+            <img src="/img/logo-card.webp" alt="logo">
+            <p class="navigation-header-user-level">10</p>
+        </div>
+      <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium"/>
+    </div>
+    <div class="navigation-username">
+      <p class="navigation-username-title">Test Test</p>
+      <p class="navigation-username-subtitle">@ananas</p>
+    </div>
+  </nav>
+</aside>
     <div class="container">
       <div class="tag-card">
         <p class="tag-card-title">{{ cardTitle }}</p>
-        <DevButton :iconStart="iconButton"
-                   :iconSize="iconSize"
-                   :variant="tagVariant">
+        <DevButton :iconStart="faPlus"
+                   :iconSize="large"
+                   :variant="defaultVariant">
                    {{ cardButtonTitle }}
         </DevButton>
       </div>
 
       <div class="popular">
         <h3 class="popular-title">{{ popularTitle }}</h3>
-        <DevButton :iconEnd="iconButton"
-                   :iconSize="iconSize"
-                   :size="shortcutIconSize"
-                   :variant="popularVariant">
+        <DevButton :iconEnd="faPlus"
+                   :iconSize="large"
+                   :size="medium"
+                   :variant="transparentVariant">
                    {{ transparentButtonTitle }}
         </DevButton>
       </div>
@@ -54,13 +69,15 @@ export default {
   data () {
     return {
       cards,
-      iconSize: 'lg',
-      tagVariant: 'default',
-      shortcutIconSize: 'md',
+      large: 'lg',
+      medium: 'md',
+      largeTwo: '2x',
       popularTitle: 'Popular',
-      popularVariant: 'transparent',
+      gear: 'fa-solid fa-gear',
+      defaultVariant: 'default',
+      faPlus: "fa-solid fa-plus",
       cardButtonTitle: "Choose tags",
-      iconButton: "fa-solid fa-plus",
+      transparentVariant: 'transparent',
       transparentButtonTitle: 'Add shortcuts',
       cardTitle: 'Get the content you need by creating a personal feed'
     }
@@ -69,6 +86,73 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.overlay {
+  position: fixed;
+  // display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  cursor: pointer;
+  background-color: $theme-overlay;
+}
+
+.navigation {
+  height: 100%;
+  width: 28rem;
+  background-color: $background-primary;
+  
+  &-header {
+    display: flex;
+    padding: 2.8rem 2.4rem 2rem;
+    justify-content: space-between;
+
+    &-user {
+      display: flex;
+      width: 6.5rem;
+      height: 3.2rem;
+      align-items: center;
+      border-radius: .8rem;
+      background-color: $background-secondary;
+
+      img {
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: .8rem;
+      }
+    }
+
+    &-user-level {
+      color: $white;
+      font-weight: 700;
+      font-size: 1.5rem;
+      padding-left: .5rem; 
+    }
+  }
+
+&-username {
+  padding: 0 2.4rem;
+    &-title {
+      color: $white;
+      font-weight: 700;
+      line-height: 2rem;
+      font-size: 1.5rem;
+      margin-bottom: .2rem;
+    }
+
+    &-subtitle {
+      color: $label-secondary;
+      line-height: 1.8rem;
+      font-size: 1.3rem;
+      margin-bottom: .2rem;
+    }
+  
+}
+}
+
   .main {
     display: flex;
     justify-content: center;

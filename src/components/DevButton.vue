@@ -161,7 +161,8 @@ export default {
         background-color: transparent;
 
         &.sm,
-        &.md {
+        &.md,
+        &.lg {
             padding: 0;
             width: 3.2rem;
             height: 3.2rem;
@@ -171,6 +172,12 @@ export default {
         &.md {
             width: 4rem;
             height: 4rem;
+            border-radius: 1.2rem;
+        }
+
+        &.lg {
+            width: 4.3rem;
+            height: 4.3rem;
             border-radius: 1.2rem;
         }
     }

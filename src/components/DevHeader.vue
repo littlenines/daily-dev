@@ -3,7 +3,7 @@
       <DevButton icon
                  :ico="ico"
                  :iconSize="iconSize"
-                 :size="size"/>
+                 :size="medium"/>
       <div class="image-wrapper">
         <img src="@/assets/logo.png" class="logo-image" alt="logo">
       </div>
@@ -19,9 +19,9 @@ export default {
   },
   data () {
     return {
-      ico: 'fa-solid fa-bars',
+      medium: 'md',
       iconSize: '2x',
-      size: 'md'
+      ico: 'fa-solid fa-bars'
     }
   }
 }
