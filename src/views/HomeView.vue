@@ -2,16 +2,38 @@
   <main class="main">
 <aside class="overlay">
   <nav class="navigation">
-    <div class="navigation-header">
-        <div class="navigation-header-user">
-            <img src="/img/logo-card.webp" alt="logo">
-            <p class="navigation-header-user-level">10</p>
-        </div>
-      <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium"/>
+    <div class="navigation-wrapper">
+      <div class="navigation-header">
+          <div class="navigation-header-user">
+              <img src="/img/logo-card.webp" alt="logo">
+              <p class="navigation-header-user-level">10</p>
+          </div>
+        <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium"/>
+      </div>
+      <div class="navigation-username">
+        <p class="navigation-username-title">Test Test</p>
+        <p class="navigation-username-subtitle">@ananas</p>
+      </div>
     </div>
-    <div class="navigation-username">
-      <p class="navigation-username-title">Test Test</p>
-      <p class="navigation-username-subtitle">@ananas</p>
+    <div class="navigation-discussion">
+      <ul>
+        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-solid fa-fire-flame-curved" class="icon-divider"/><p>Popular</p></a></li>
+        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-solid fa-angles-up" class="icon-divider"/><p>Most upvoted</p></a></li>
+        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-regular fa-message" class="icon-divider"/><p>Best discussion</p></a></li>
+        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-solid fa-link" class="icon-divider"/><p>Submit article</p></a></li>
+        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-regular fa-eye" class="icon-divider"/><p>Reading history</p></a></li>
+        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-regular fa-circle-pause" class="icon-divider"/><p>Pause new tab</p></a></li>
+        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-solid fa-gear" class="icon-divider"/><p>Customize</p></a></li>
+      </ul>
+    </div>
+
+    <div class="navigation-footer">
+      <ul>
+        <li><a href="/" class="discussion-link"> <font-awesome-icon icon="fa-solid fa-fire-flame-curved" class="icon-divider"/><p>Docs</p></a></li>
+        <li><a href="/" class="discussion-link"> <font-awesome-icon icon="fa-solid fa-angles-up" class="icon-divider"/><p>Changelog</p></a></li>
+        <li><a href="/" class="discussion-link"> <font-awesome-icon icon="fa-regular fa-message" class="icon-divider"/><p>Feedback</p></a></li>
+        <li><a href="/" class="discussion-link"> <font-awesome-icon icon="fa-solid fa-link" class="icon-divider"/><p>Invite people</p></a></li>
+      </ul>
     </div>
   </nav>
 </aside>
@@ -19,8 +41,7 @@
       <div class="tag-card">
         <p class="tag-card-title">{{ cardTitle }}</p>
         <DevButton :iconStart="faPlus"
-                   :iconSize="large"
-                   :variant="defaultVariant">
+                   :iconSize="large">
                    {{ cardButtonTitle }}
         </DevButton>
       </div>
@@ -74,7 +95,6 @@ export default {
       largeTwo: '2x',
       popularTitle: 'Popular',
       gear: 'fa-solid fa-gear',
-      defaultVariant: 'default',
       faPlus: "fa-solid fa-plus",
       cardButtonTitle: "Choose tags",
       transparentVariant: 'transparent',
@@ -101,13 +121,17 @@ export default {
 }
 
 .navigation {
-  height: 100%;
+  height: 100vh;
   width: 28rem;
   background-color: $background-primary;
-  
+
+  &-wrapper {
+    padding: 2.8rem 2.4rem 2rem;
+  }
+
   &-header {
     display: flex;
-    padding: 2.8rem 2.4rem 2rem;
+    margin-bottom: 2.4rem;
     justify-content: space-between;
 
     &-user {
@@ -134,7 +158,6 @@ export default {
   }
 
 &-username {
-  padding: 0 2.4rem;
     &-title {
       color: $white;
       font-weight: 700;
@@ -144,14 +167,40 @@ export default {
     }
 
     &-subtitle {
-      color: $label-secondary;
-      line-height: 1.8rem;
       font-size: 1.3rem;
+      line-height: 1.8rem;
       margin-bottom: .2rem;
+      color: $label-secondary;
     }
-  
+  }
 }
-}
+
+.navigation-discussion {
+  margin-bottom: 2rem;
+  text-align: left;
+  }
+
+  li {
+    padding: 1.3rem 2.4rem;
+
+    &:hover {
+      background-color: $background-active;
+    }
+
+    &:hover .discussion-link {
+      color: $white;
+    }
+  }
+
+  .discussion-link{
+    font-size: 1.4rem;
+    color: $label-tertiary;
+    display: flex;
+  }
+
+  .icon-divider {
+    padding-right: 1.3rem;
+  }
 
   .main {
     display: flex;

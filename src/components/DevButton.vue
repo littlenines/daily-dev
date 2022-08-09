@@ -21,7 +21,7 @@ export default {
             type: String,
             default: 'default',
             validator: (value) => {
-                return ['default', 'success', 'warning'].indexOf(value) > -1
+                return ['default', 'success', 'warning', 'transparent'].indexOf(value) > -1
             }
         },
         iconStart: {
@@ -34,7 +34,7 @@ export default {
             type: String,
             default: 'sm',
             validator: (value) => {
-                const fontSizes = ['xs','sm', 'lg', '2x', '3x', '5x','7x', '10x']
+                const fontSizes = ['xs','sm', 'md', 'lg', '2x', '3x', '5x','7x', '10x']
                 return fontSizes.indexOf(value) > -1
             }
         },
