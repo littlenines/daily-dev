@@ -1,0 +1,18 @@
+[
+    {
+        "icon": "fa-regular fa-file-lines",
+        "title": "Docs"
+    },
+    {
+        "icon": "fa-solid fa-terminal",
+        "title": "Changelog"
+    },
+    {
+        "icon": "fa-regular fa-comment-dots",
+        "title": "Feedback"
+    },
+    {
+        "icon": "fa-solid fa-user-astronaut",
+        "title": "Invite people"
+    }
+]

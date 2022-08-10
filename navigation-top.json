@@ -1,0 +1,30 @@
+[
+    {
+        "icon": "fa-solid fa-fire-flame-curved",
+        "title": "Popular"
+    },
+    {
+        "icon": "fa-solid fa-angles-up",
+        "title": "Most upvoted"
+    },
+    {
+        "icon": "fa-regular fa-message",
+        "title": "Best discussion"
+    },
+    {
+        "icon": "fa-solid fa-link",
+        "title": "Submit article"
+    },
+    {
+        "icon": "fa-regular fa-eye",
+        "title": "Reading history"
+    },
+    {
+        "icon": "fa-regular fa-circle-pause",
+        "title": "Pause new tab"
+    },
+    {
+        "icon": "fa-solid fa-gear",
+        "title": "Customize"
+    }
+]

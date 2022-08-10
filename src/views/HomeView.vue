@@ -1,42 +1,43 @@
 <template>
   <main class="main">
-<aside class="overlay">
-  <nav class="navigation">
-    <div class="navigation-wrapper">
-      <div class="navigation-header">
-          <div class="navigation-header-user">
-              <img src="/img/logo-card.webp" alt="logo">
-              <p class="navigation-header-user-level">10</p>
+    <aside class="overlay">
+      <nav class="navigation">
+        <div class="navigation-wrapper">
+          <div class="navigation-header">
+              <div class="navigation-header-user">
+                  <img src="/img/logo-card.webp" alt="logo">
+                  <p class="navigation-header-user-level">10</p>
+              </div>
+            <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium"/>
           </div>
-        <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium"/>
-      </div>
-      <div class="navigation-username">
-        <p class="navigation-username-title">Test Test</p>
-        <p class="navigation-username-subtitle">@ananas</p>
-      </div>
-    </div>
-    <div class="navigation-discussion">
-      <ul>
-        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-solid fa-fire-flame-curved" class="icon-divider"/><p>Popular</p></a></li>
-        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-solid fa-angles-up" class="icon-divider"/><p>Most upvoted</p></a></li>
-        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-regular fa-message" class="icon-divider"/><p>Best discussion</p></a></li>
-        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-solid fa-link" class="icon-divider"/><p>Submit article</p></a></li>
-        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-regular fa-eye" class="icon-divider"/><p>Reading history</p></a></li>
-        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-regular fa-circle-pause" class="icon-divider"/><p>Pause new tab</p></a></li>
-        <li><a href="/" class="discussion-link"><font-awesome-icon icon="fa-solid fa-gear" class="icon-divider"/><p>Customize</p></a></li>
-      </ul>
-    </div>
+          <div class="navigation-username">
+            <p class="navigation-username-title">Test Test</p>
+            <p class="navigation-username-subtitle">@ananas</p>
+          </div>
+        </div>
+        <div class="navigation-discussion">
+          <ul>
+            <li v-for="(item, index) in navTop" :key="index">
+              <a href="/" class="discussion-link">
+                <font-awesome-icon :icon="item.icon" class="icon-divider"/>
+                <p>{{ item.title }}</p>
+              </a>
+            </li>
+          </ul>
+        </div>
 
-    <div class="navigation-footer">
-      <ul>
-        <li><a href="/" class="discussion-link"> <font-awesome-icon icon="fa-solid fa-fire-flame-curved" class="icon-divider"/><p>Docs</p></a></li>
-        <li><a href="/" class="discussion-link"> <font-awesome-icon icon="fa-solid fa-angles-up" class="icon-divider"/><p>Changelog</p></a></li>
-        <li><a href="/" class="discussion-link"> <font-awesome-icon icon="fa-regular fa-message" class="icon-divider"/><p>Feedback</p></a></li>
-        <li><a href="/" class="discussion-link"> <font-awesome-icon icon="fa-solid fa-link" class="icon-divider"/><p>Invite people</p></a></li>
-      </ul>
-    </div>
-  </nav>
-</aside>
+        <div class="navigation-footer">
+           <ul>
+            <li v-for="(item, index) in navBottom" :key="index">
+              <a href="/" class="discussion-link">
+                <font-awesome-icon :icon="item.icon" class="icon-divider"/>
+                <p>{{ item.title }}</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </aside>
     <div class="container">
       <div class="tag-card">
         <p class="tag-card-title">{{ cardTitle }}</p>
@@ -56,7 +57,7 @@
         </DevButton>
       </div>
       
-      <div v-for="(card, index) in cards" :key="index">
+      <div v-for="(card, index) in cards" :key="index" class="card-space">
         <a href="/"> 
           <DevCard :image="card.image"
                    :title="card.title"
@@ -67,8 +68,7 @@
                    :iconMiddle="card.iconMiddle"
                    :iconEnd="card.iconEnd"
                    :promoted="card.promoted"
-                   :iconLabel="card.icoLabel" 
-                   class="card-space"/>
+                   :iconLabel="card.icoLabel" />
         </a>
       </div>
     </div>
@@ -77,9 +77,12 @@
 
 <script>
 // @ is an alias to /src
-import DevButton from '@/components/DevButton.vue'
-import DevCard from '@/components/DevCard.vue'
 import cards from '../../cards.json'
+import navTop from '../../navigation-top.json'
+import navBottom from '../../navigation-bottom.json'
+
+import DevCard from '@/components/DevCard.vue'
+import DevButton from '@/components/DevButton.vue'
 
 export default {
   name: 'HomeView',
@@ -90,6 +93,8 @@ export default {
   data () {
     return {
       cards,
+      navTop,
+      navBottom,
       large: 'lg',
       medium: 'md',
       largeTwo: '2x',
@@ -126,12 +131,12 @@ export default {
   background-color: $background-primary;
 
   &-wrapper {
-    padding: 2.8rem 2.4rem 2rem;
+    padding: 2.5rem 2.4rem 2rem;
   }
 
   &-header {
     display: flex;
-    margin-bottom: 2.4rem;
+    margin-bottom: 2rem;
     justify-content: space-between;
 
     &-user {
@@ -157,7 +162,7 @@ export default {
     }
   }
 
-&-username {
+  &-username {
     &-title {
       color: $white;
       font-weight: 700;
@@ -176,72 +181,71 @@ export default {
 }
 
 .navigation-discussion {
-  margin-bottom: 2rem;
-  text-align: left;
+  margin-bottom: 4rem;
+}
+
+li {
+  padding: 1.3rem;
+
+  &:hover {
+    background-color: $background-active;
   }
 
-  li {
-    padding: 1.3rem 2.4rem;
-
-    &:hover {
-      background-color: $background-active;
-    }
-
-    &:hover .discussion-link {
-      color: $white;
-    }
-  }
-
-  .discussion-link{
-    font-size: 1.4rem;
-    color: $label-tertiary;
-    display: flex;
-  }
-
-  .icon-divider {
-    padding-right: 1.3rem;
-  }
-
-  .main {
-    display: flex;
-    justify-content: center;
-  }
-
-  .tag-card {
-    display: flex;
-    padding: 1rem;
-    flex-wrap: wrap;
-    border-radius: 1.2rem;
-    justify-content: center;
-    margin-bottom: 2.4rem;
-    border: 1px solid $button-default;
-    box-shadow: $default-shadow;
-  }
-
-  .tag-card-title {
+  &:hover .discussion-link {
     color: $white;
-    font-weight: 400;
-    font-size: 1.3rem;
-    text-align: center;
-    line-height: 1.8rem;
-    margin-bottom: 1rem;
   }
+}
 
-  .popular {
-    display: flex;
-    align-items: center;
-    margin-bottom: 3rem;
-  }
+.discussion-link{
+  display: flex;
+  font-size: 1.5rem;
+  color: $label-tertiary;
+}
 
-  .popular-title {
-    flex: 1;
-    color: $white;
-    font-size: 1.7rem;
-    line-height: 2.4rem;
-    font-weight: 700;
-  }
+.icon-divider {
+  width: 4rem;
+}
 
-  .card-space {
-    margin-bottom: 3.2rem;
-  }
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.tag-card {
+  display: flex;
+  padding: 1rem;
+  flex-wrap: wrap;
+  border-radius: 1.2rem;
+  margin-bottom: 2.4rem;
+  justify-content: center;
+  box-shadow: $default-shadow;
+  border: 1px solid $button-default;
+}
+
+.tag-card-title {
+  color: $white;
+  font-weight: 400;
+  font-size: 1.3rem;
+  text-align: center;
+  line-height: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.popular {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.popular-title {
+  flex: 1;
+  color: $white;
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 2.4rem;
+}
+
+.card-space {
+  margin-bottom: 3.2rem;
+}
 </style>
