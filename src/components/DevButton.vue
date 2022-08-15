@@ -6,7 +6,7 @@
     <font-awesome-icon  v-if="iconEnd" :icon="iconEnd" :size="iconSize" />
   </button>
   <!-- ICON -->
-  <div v-else class="btn-icon">
+  <div v-else class="btn-icon" @click="isNav">
     <button :class="['icon', variantIcon, size]" id="icon">
         <font-awesome-icon :icon="ico" :size="iconSize" />
     </button>
@@ -67,6 +67,11 @@ export default {
         },
         variantLabel () {
             return 'label-' + this.$props.variant
+        }
+    },
+    methods: {
+        isNav () {
+            this.$emit('isNav', true)
         }
     }
 }

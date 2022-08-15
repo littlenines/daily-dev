@@ -1,14 +1,8 @@
 import { createStore } from 'vuex'
+import navigation from './modules/navigation'
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    navigation
   }
 })

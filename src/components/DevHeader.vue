@@ -3,7 +3,7 @@
       <DevButton icon
                  :ico="ico"
                  :iconSize="iconSize"
-                 :size="medium"/>
+                 :size="medium" />
       <div class="image-wrapper">
         <img src="@/assets/logo.png" class="logo-image" alt="logo">
       </div>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import DevButton from '@/components/DevButton.vue'
 export default {
   components: {
@@ -22,6 +23,13 @@ export default {
       medium: 'md',
       iconSize: '2x',
       ico: 'fa-solid fa-bars'
+    }
+  },
+  methods: {
+    ...mapActions('navigation',['setIsNav']),
+
+    setNav () {
+      this.setIsNav(true)
     }
   }
 }

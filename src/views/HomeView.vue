@@ -1,6 +1,6 @@
 <template>
   <main class="main">
-    <aside class="overlay">
+    <aside class="overlay" v-if="getNav" @click="setNav">
       <nav class="navigation">
         <div class="navigation-wrapper">
           <div class="navigation-header">
@@ -11,8 +11,8 @@
             <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium"/>
           </div>
           <div class="navigation-username">
-            <p class="navigation-username-title">Test Test</p>
-            <p class="navigation-username-subtitle">@ananas</p>
+            <p class="navigation-username-title">{{ usernameTitle }}</p>
+            <p class="navigation-username-subtitle">{{ usernameSubtitle }}</p>
           </div>
         </div>
         <div class="navigation-discussion">
@@ -77,6 +77,7 @@
 
 <script>
 // @ is an alias to /src
+import { mapActions, mapGetters } from 'vuex'
 import cards from '../../cards.json'
 import navTop from '../../navigation-top.json'
 import navBottom from '../../navigation-bottom.json'
@@ -96,16 +97,29 @@ export default {
       navTop,
       navBottom,
       large: 'lg',
+      isNav: false,
       medium: 'md',
       largeTwo: '2x',
       popularTitle: 'Popular',
       gear: 'fa-solid fa-gear',
       faPlus: "fa-solid fa-plus",
+      usernameTitle: 'Test Test',
+      usernameSubtitle: '@ananas',
       cardButtonTitle: "Choose tags",
       transparentVariant: 'transparent',
       transparentButtonTitle: 'Add shortcuts',
       cardTitle: 'Get the content you need by creating a personal feed'
     }
+  },
+  computed: {
+    ...mapGetters('navigation', ['getNav'])
+  },
+  methods: {
+    ...mapActions('navigation',['setIsNav']),
+    setNav () {
+      this.setIsNav(false)
+    }
+
   }
 }
 </script>
