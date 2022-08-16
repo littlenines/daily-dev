@@ -9,14 +9,17 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faCode } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faGear } from '@fortawesome/free-solid-svg-icons'
+import { faPlug } from '@fortawesome/free-solid-svg-icons'
 import { faLink } from '@fortawesome/free-solid-svg-icons'
 import { faTerminal } from '@fortawesome/free-solid-svg-icons'
 import { faAnglesUp } from '@fortawesome/free-solid-svg-icons'
+import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons'
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons'
 
 import { faEye } from '@fortawesome/free-regular-svg-icons'
+import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { faMessage } from '@fortawesome/free-regular-svg-icons'
 import { faBookmark } from '@fortawesome/free-regular-svg-icons'
 import { faFileLines } from '@fortawesome/free-regular-svg-icons'
@@ -30,11 +33,14 @@ library.add(faEye,
             faPlus,
             faGear,
             faLink,
+            faUser,
+            faPlug,
             faMessage,
             faBookmark,
             faTerminal,
             faAnglesUp,
             faFileLines,
+            faFloppyDisk,
             faSquarePlus,
             faCommentDots,
             faCirclePause,

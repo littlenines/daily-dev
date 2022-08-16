@@ -6,7 +6,7 @@
     <font-awesome-icon  v-if="iconEnd" :icon="iconEnd" :size="iconSize" />
   </button>
   <!-- ICON -->
-  <div v-else class="btn-icon" @click="isNav">
+  <div v-else class="btn-icon" @click="clickEvent">
     <button :class="['icon', variantIcon, size]" id="icon">
         <font-awesome-icon :icon="ico" :size="iconSize" />
     </button>
@@ -70,8 +70,8 @@ export default {
         }
     },
     methods: {
-        isNav () {
-            this.$emit('isNav', true)
+        clickEvent () {
+            this.$emit('click')
         }
     }
 }

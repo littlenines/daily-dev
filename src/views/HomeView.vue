@@ -1,43 +1,55 @@
 <template>
   <main class="main">
-    <aside class="overlay" v-if="getNav" @click="setNav">
-      <nav class="navigation">
-        <div class="navigation-wrapper">
-          <div class="navigation-header">
-              <div class="navigation-header-user">
-                  <img src="/img/logo-card.webp" alt="logo">
-                  <p class="navigation-header-user-level">10</p>
+    <Transition name="fade">
+      <aside class="overlay" v-if="getNav" @click.self="setNav">
+        <nav class="navigation" @click.self="isSettingsOpen = false">
+          <div class="navigation-wrapper">
+            <div class="navigation-header">
+                <div class="navigation-header-user">
+                    <img src="/img/logo-card.webp" alt="logo">
+                    <p class="navigation-header-user-level">10</p>
+                </div>
+              <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium" @click="openSettings"/>
+              <div class="navigation-modal" v-if="isSettingsOpen">
+                <ul>
+                  <li v-for="(item, index) in settings" :key="index" class="modal-list">
+                    <a href="/" class="modal-link">
+                      <font-awesome-icon :icon="item.icon" class="modal-divider" :size="large"/>
+                      <p>{{ item.title }}</p>
+                    </a>
+                  </li>
+                </ul>
               </div>
-            <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium"/>
+            </div>
+            <div class="navigation-username">
+              <p class="navigation-username-title">{{ usernameTitle }}</p>
+              <p class="navigation-username-subtitle">{{ usernameSubtitle }}</p>
+            </div>
           </div>
-          <div class="navigation-username">
-            <p class="navigation-username-title">{{ usernameTitle }}</p>
-            <p class="navigation-username-subtitle">{{ usernameSubtitle }}</p>
+          <div class="navigation-discussion">
+            <ul>
+              <li v-for="(item, index) in navTop" :key="index">
+                <a href="/" class="discussion-link">
+                  <font-awesome-icon :icon="item.icon" class="icon-divider"/>
+                  <p>{{ item.title }}</p>
+                </a>
+              </li>
+            </ul>
           </div>
-        </div>
-        <div class="navigation-discussion">
-          <ul>
-            <li v-for="(item, index) in navTop" :key="index">
-              <a href="/" class="discussion-link">
-                <font-awesome-icon :icon="item.icon" class="icon-divider"/>
-                <p>{{ item.title }}</p>
-              </a>
-            </li>
-          </ul>
-        </div>
 
-        <div class="navigation-footer">
-           <ul>
-            <li v-for="(item, index) in navBottom" :key="index">
-              <a href="/" class="discussion-link">
-                <font-awesome-icon :icon="item.icon" class="icon-divider"/>
-                <p>{{ item.title }}</p>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </aside>
+          <div class="navigation-footer">
+            <ul>
+              <li v-for="(item, index) in navBottom" :key="index">
+                <a href="/" class="discussion-link">
+                  <font-awesome-icon :icon="item.icon" class="icon-divider"/>
+                  <p>{{ item.title }}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
+    </Transition>
     <div class="container">
       <div class="tag-card">
         <p class="tag-card-title">{{ cardTitle }}</p>
@@ -78,7 +90,9 @@
 <script>
 // @ is an alias to /src
 import { mapActions, mapGetters } from 'vuex'
+
 import cards from '../../cards.json'
+import settings from '../../settings.json'
 import navTop from '../../navigation-top.json'
 import navBottom from '../../navigation-bottom.json'
 
@@ -95,11 +109,13 @@ export default {
     return {
       cards,
       navTop,
+      settings,
       navBottom,
       large: 'lg',
       isNav: false,
       medium: 'md',
       largeTwo: '2x',
+      isSettingsOpen: false,
       popularTitle: 'Popular',
       gear: 'fa-solid fa-gear',
       faPlus: "fa-solid fa-plus",
@@ -118,30 +134,48 @@ export default {
     ...mapActions('navigation',['setIsNav']),
     setNav () {
       this.setIsNav(false)
+      this.isSettingsOpen = false
+    },
+    openSettings () {
+      if (this.isSettingsOpen === false) this.isSettingsOpen = true
+      else this.isSettingsOpen = false
     }
-
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: .3s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  transform: translateX(-400px);
+}
+
+.fade-leave-from {
+  transform: translateX(0px);
+}
+
 .overlay {
   position: fixed;
-  // display: none;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 2;
+  z-index: 1;
   cursor: pointer;
   background-color: $theme-overlay;
 }
 
 .navigation {
-  height: 100vh;
   width: 28rem;
+  height: 100vh;
   background-color: $background-primary;
 
   &-wrapper {
@@ -192,6 +226,17 @@ export default {
       color: $label-secondary;
     }
   }
+
+  &-modal {
+    position: absolute;
+    top: 6.8rem;
+    left: 12rem;
+    padding: .5rem 0;
+    border-radius: 1.2rem;
+    box-shadow: $card-shadow;
+    border: 1px solid $divider-secondary;
+    background-color: $background-secondary;
+  }
 }
 
 .navigation-discussion {
@@ -210,14 +255,33 @@ li {
   }
 }
 
-.discussion-link{
+.modal-list{
+  padding: .8rem 1rem;
+
+  &:hover {
+    border-radius: 1.2rem;
+  }
+}
+
+.discussion-link,
+.modal-link {
   display: flex;
   font-size: 1.5rem;
   color: $label-tertiary;
 }
 
+.modal-link {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
 .icon-divider {
   width: 4rem;
+}
+
+.modal-divider {
+  width: 2.5rem;
+  padding-right: .5rem;
 }
 
 .main {

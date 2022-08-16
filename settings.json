@@ -1,0 +1,18 @@
+[
+    {
+        "icon": "fa-regular fa-user",
+        "title": "Profile"
+    },
+    {
+        "icon": "fa-solid fa-gear",
+        "title": "Account details"
+    },
+    {
+        "icon": "fa-solid fa-floppy-disk",
+        "title": "Dev card"
+    },
+    {
+        "icon": "fa-solid fa-plug",
+        "title": "Logout"
+    }
+]

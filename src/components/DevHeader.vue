@@ -3,7 +3,8 @@
       <DevButton icon
                  :ico="ico"
                  :iconSize="iconSize"
-                 :size="medium" />
+                 :size="medium"
+                 @click="openNav"/>
       <div class="image-wrapper">
         <img src="@/assets/logo.png" class="logo-image" alt="logo">
       </div>
@@ -28,7 +29,7 @@ export default {
   methods: {
     ...mapActions('navigation',['setIsNav']),
 
-    setNav () {
+    openNav () {
       this.setIsNav(true)
     }
   }
