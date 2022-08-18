@@ -14,7 +14,7 @@
         <p v-if="date" class="card-info-subtitle">{{ date }} &bullet; {{ time }} read time</p>
       </slot>
     </div>
-    <div class="card-image">
+    <div :class="['card-image', {'promoted-laptop': promoted}]">
       <img :src="hero" alt="hero">
     </div>
     <div v-if="!promoted" class="card-footer">
@@ -98,6 +98,12 @@ export default {
     box-shadow: $card-shadow;
     border: 1px solid $divider;
     background-color: $background-secondary;
+    @include md {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
 
     &:hover {
       border-color: $divider-secondary;
@@ -165,5 +171,11 @@ export default {
     padding: 0 1.6rem;
     line-height: 1.8rem;
     color: $label-tertiary;
+  }
+
+  .promoted-laptop {
+    @include md {
+      margin-top: 2.5rem;
+    }
   }
 </style>

@@ -51,12 +51,14 @@
       </aside>
     </Transition>
     <div class="container">
-      <div class="tag-card">
-        <p class="tag-card-title">{{ cardTitle }}</p>
-        <DevButton :iconStart="faPlus"
-                   :iconSize="large">
-                   {{ cardButtonTitle }}
-        </DevButton>
+      <div class="tag">
+        <div class="tag-card">
+          <p class="tag-card-title">{{ cardTitle }}</p>
+          <DevButton :iconStart="faPlus"
+                    :iconSize="large">
+                    {{ cardButtonTitle }}
+          </DevButton>
+        </div>
       </div>
 
       <div class="popular">
@@ -69,6 +71,8 @@
         </DevButton>
       </div>
       
+      <div class="cards">
+
       <div v-for="(card, index) in cards" :key="index" class="card-space">
         <a href="/"> 
           <DevCard :image="card.image"
@@ -82,6 +86,7 @@
                    :promoted="card.promoted"
                    :iconLabel="card.icoLabel" />
         </a>
+      </div>
       </div>
     </div>
   </main>
@@ -287,6 +292,12 @@ li {
 .main {
   display: flex;
   justify-content: center;
+    padding: 0 2.4rem;
+}
+
+.tag {
+  display: flex;
+  justify-content: center;
 }
 
 .tag-card {
@@ -298,6 +309,9 @@ li {
   justify-content: center;
   box-shadow: $default-shadow;
   border: 1px solid $button-default;
+  @include md {
+    align-items: center;
+  }
 }
 
 .tag-card-title {
@@ -307,6 +321,10 @@ li {
   text-align: center;
   line-height: 1.8rem;
   margin-bottom: 1rem;
+  @include md {
+    margin-bottom: unset;
+    margin-right: 3.2rem;
+  }
 }
 
 .popular {
@@ -321,6 +339,16 @@ li {
   font-weight: 700;
   font-size: 1.7rem;
   line-height: 2.4rem;
+}
+
+.cards {
+ @include md {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 32px;
+ }
 }
 
 .card-space {

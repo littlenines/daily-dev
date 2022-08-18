@@ -25,5 +25,8 @@ body {
 .container {
   width: 100%;
   max-width: 320px;
+  @include md {
+    max-width: 650px;
+  }
 }
 </style>
