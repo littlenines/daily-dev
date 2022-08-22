@@ -1,6 +1,6 @@
 <template>
   <!-- BUTTON -->
-  <button v-if="!icon" :class="['btn', size, variantButton, { block }]">
+  <button v-if="!icon" :class="['btn', size, variantButton, { block }]" @click="clickEvent">
     <font-awesome-icon  v-if="iconStart" :icon="iconStart"  :size="iconSize"/>
     &ensp;<slot>Add</slot>&ensp;
     <font-awesome-icon  v-if="iconEnd" :icon="iconEnd" :size="iconSize" />
@@ -16,6 +16,7 @@
 
 <script>
 export default {
+    inheritAttrs: false,
     props: {
         variant: {
             type: String,

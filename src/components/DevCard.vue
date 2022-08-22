@@ -11,8 +11,11 @@
     <div class="card-info">
       <slot name="info">
         <h3 class="card-info-title">{{ title }}</h3>
-        <p v-if="date" class="card-info-subtitle">{{ date }} &bullet; {{ time }} read time</p>
       </slot>
+    </div>
+    <div class="flex-1"></div>
+    <div class="card-info">
+      <p v-if="date" class="card-info-subtitle">{{ date }} &bullet; {{ time }} read time</p>
     </div>
     <div :class="['card-image', {'promoted-laptop': promoted}]">
       <img :src="hero" alt="hero">
@@ -146,6 +149,9 @@ export default {
     line-height: 1.8rem;
     margin-bottom: 3.2rem;
     color: $label-tertiary;
+    @include md {
+      margin-bottom: unset;
+    }
   }
 
   .card-image {

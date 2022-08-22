@@ -36,7 +36,7 @@
               </li>
             </ul>
           </div>
-
+          <div class="flex-1"></div>
           <div class="navigation-footer">
             <ul>
               <li v-for="(item, index) in navBottom" :key="index">
@@ -50,6 +50,54 @@
         </nav>
       </aside>
     </Transition>
+          <!-- <aside class="overlay"  @click.self="setNav">
+        <nav class="navigation" @click.self="isSettingsOpen = false">
+          <div class="navigation-wrapper">
+            <div class="navigation-header">
+                <div class="navigation-header-user">
+                    <img src="/img/logo-card.webp" alt="logo">
+                    <p class="navigation-header-user-level">10</p>
+                </div>
+              <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium" @click="openSettings"/>
+              <div class="navigation-modal" v-if="isSettingsOpen">
+                <ul>
+                  <li v-for="(item, index) in settings" :key="index" class="modal-list">
+                    <a href="/" class="modal-link">
+                      <font-awesome-icon :icon="item.icon" class="modal-divider" :size="large"/>
+                      <p>{{ item.title }}</p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="navigation-username">
+              <p class="navigation-username-title">{{ usernameTitle }}</p>
+              <p class="navigation-username-subtitle">{{ usernameSubtitle }}</p>
+            </div>
+          </div>
+          <div class="navigation-discussion">
+            <ul>
+              <li v-for="(item, index) in navTop" :key="index">
+                <a href="/" class="discussion-link">
+                  <font-awesome-icon :icon="item.icon" class="icon-divider"/>
+                  <p>{{ item.title }}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="flex-1"></div>
+          <div class="navigation-footer">
+            <ul>
+              <li v-for="(item, index) in navBottom" :key="index">
+                <a href="/" class="discussion-link">
+                  <font-awesome-icon :icon="item.icon" class="icon-divider"/>
+                  <p>{{ item.title }}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </aside> -->
     <div class="container">
       <div class="tag">
         <div class="tag-card">
@@ -127,10 +175,20 @@ export default {
       usernameTitle: 'Test Test',
       usernameSubtitle: '@ananas',
       cardButtonTitle: "Choose tags",
+      windowWidth: window.innerWidth,
       transparentVariant: 'transparent',
       transparentButtonTitle: 'Add shortcuts',
       cardTitle: 'Get the content you need by creating a personal feed'
     }
+  },
+  
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    })
+  },
+  beforeUnmount() { 
+    window.removeEventListener('resize', this.onResize); 
   },
   computed: {
     ...mapGetters('navigation', ['getNav'])
@@ -144,6 +202,10 @@ export default {
     openSettings () {
       if (this.isSettingsOpen === false) this.isSettingsOpen = true
       else this.isSettingsOpen = false
+    },
+    onResize() {
+      this.windowHeight = window.innerWidth
+      if (this.windowWidth >= 1024) this.setIsNav(true)
     }
   }
 }
@@ -159,6 +221,9 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   transform: translateX(-400px);
+  @include md {
+    transform: translateX(-800px);
+  }
 }
 
 .fade-leave-from {
@@ -176,12 +241,27 @@ export default {
   z-index: 1;
   cursor: pointer;
   background-color: $theme-overlay;
+  @include lg {
+    width: 0;
+    height: 0;
+    right: unset;
+    width: unset;
+    height:unset;
+    top: 5.1rem;
+    background-color: unset;
+  }
 }
 
 .navigation {
   width: 28rem;
-  height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   background-color: $background-primary;
+  @include lg {
+    width: 24rem;
+    border-right: 1px solid $divider;
+  }
 
   &-wrapper {
     padding: 2.5rem 2.4rem 2rem;
@@ -212,6 +292,12 @@ export default {
       font-weight: 700;
       font-size: 1.5rem;
       padding-left: .5rem; 
+    }
+  }
+
+  &-footer {
+    @include md {
+      padding: 1.5rem 0;
     }
   }
 
@@ -246,6 +332,9 @@ export default {
 
 .navigation-discussion {
   margin-bottom: 4rem;
+  @include md {
+    margin-bottom: unset;
+  }
 }
 
 li {
@@ -292,12 +381,19 @@ li {
 .main {
   display: flex;
   justify-content: center;
-    padding: 0 2.4rem;
+  padding: 0 2.4rem;
+  @include lg {
+    margin: 0 0 0 24.5rem;
+    padding: unset;
+  }
 }
 
 .tag {
   display: flex;
   justify-content: center;
+  @include lg {
+    margin-top: 8rem;
+  }
 }
 
 .tag-card {
@@ -353,5 +449,8 @@ li {
 
 .card-space {
   margin-bottom: 3.2rem;
+  @include md {
+    margin-bottom: unset;
+  }
 }
 </style>

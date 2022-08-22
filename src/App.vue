@@ -29,4 +29,10 @@ body {
     max-width: 650px;
   }
 }
+
+.flex-1 {
+  @include md {
+    flex: 1;
+  }
+}
 </style>

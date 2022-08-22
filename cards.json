@@ -1,8 +1,20 @@
 [
     {
+        "image": "/img/codemotion.webp",
+        "title": "Will Bun replace Deno as Node.JS killer?",
+        "date": "Today",
+        "time": "6m",
+        "hero": "/img/deno.webp",
+        "iconStart": "fa-solid fa-angles-up",
+        "iconMiddle": "fa-regular fa-message",
+        "iconEnd": "fa-regular fa-bookmark",
+        "promoted": false,
+        "icoLabel": ["", "", ""]
+    },
+    {
         "image": "/img/better.webp",
         "title": "How to Use Kotlin Symbol Processors on Android",
-        "date": "Today",
+        "date": "Jul 29, 2022",
         "time": "4m",
         "hero": "/img/arrow.jpg",
         "iconStart": "fa-solid fa-angles-up",

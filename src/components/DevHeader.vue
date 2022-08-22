@@ -39,12 +39,17 @@ export default {
 <style lang='scss' scoped>
   .header {
     display: flex;
-    padding: 1rem 2rem;
+    padding: .5rem 2rem;
     margin-bottom: 4rem;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid $divider;
     background-color: $background-primary;
+    @include lg {
+      width: 100%;
+      position: fixed;
+      margin-bottom: unset;
+    }
   }
   
   .icon-color {
