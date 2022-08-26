@@ -1,19 +1,30 @@
 <template>
   <header class="header">
+    <div class="header-sm" v-if="!getDesktop">
       <DevButton icon
-                 :ico="ico"
-                 :iconSize="iconSize"
-                 :size="medium"
-                 @click="openNav"/>
+                :ico="ico"
+                :iconSize="iconSize"
+                :size="medium"
+                @click="openNav"/>
       <div class="image-wrapper">
         <img src="@/assets/logo.png" class="logo-image" alt="logo">
       </div>
       <font-awesome-icon icon="fa-solid fa-code" class="icon-color fa-2x" />
+    </div>
+    <div class="header-md" v-else>
+      <div class="image-wrapper">
+        <img src="@/assets/logo.png" class="logo-image" alt="logo">
+      </div>
+      <div class="user">
+        <img class="user-img" src="/img/logo-card.webp" alt="logo">
+        <p class="user-level">10</p>
+      </div>
+    </div>
   </header>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import DevButton from '@/components/DevButton.vue'
 export default {
   components: {
@@ -25,6 +36,9 @@ export default {
       iconSize: '2x',
       ico: 'fa-solid fa-bars'
     }
+  },
+  computed: {
+    ...mapGetters('desktop', ['getDesktop'])
   },
   methods: {
     ...mapActions('navigation',['setIsNav']),
@@ -38,17 +52,22 @@ export default {
 
 <style lang='scss' scoped>
   .header {
-    display: flex;
     padding: .5rem 2rem;
     margin-bottom: 4rem;
-    align-items: center;
-    justify-content: space-between;
     border-bottom: 1px solid $divider;
     background-color: $background-primary;
     @include lg {
       width: 100%;
       position: fixed;
       margin-bottom: unset;
+    }
+
+    &-sm,
+    &-md {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
     }
   }
   

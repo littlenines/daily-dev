@@ -5,9 +5,9 @@
         <nav class="navigation" @click.self="isSettingsOpen = false">
           <div class="navigation-wrapper">
             <div class="navigation-header">
-                <div class="navigation-header-user">
-                    <img src="/img/logo-card.webp" alt="logo">
-                    <p class="navigation-header-user-level">10</p>
+                <div class="user">
+                    <img class="user-img" src="/img/logo-card.webp" alt="logo">
+                    <p class="user-level">10</p>
                 </div>
               <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium" @click="openSettings"/>
               <div class="navigation-modal" v-if="isSettingsOpen">
@@ -50,54 +50,6 @@
         </nav>
       </aside>
     </Transition>
-          <!-- <aside class="overlay"  @click.self="setNav">
-        <nav class="navigation" @click.self="isSettingsOpen = false">
-          <div class="navigation-wrapper">
-            <div class="navigation-header">
-                <div class="navigation-header-user">
-                    <img src="/img/logo-card.webp" alt="logo">
-                    <p class="navigation-header-user-level">10</p>
-                </div>
-              <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium" @click="openSettings"/>
-              <div class="navigation-modal" v-if="isSettingsOpen">
-                <ul>
-                  <li v-for="(item, index) in settings" :key="index" class="modal-list">
-                    <a href="/" class="modal-link">
-                      <font-awesome-icon :icon="item.icon" class="modal-divider" :size="large"/>
-                      <p>{{ item.title }}</p>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="navigation-username">
-              <p class="navigation-username-title">{{ usernameTitle }}</p>
-              <p class="navigation-username-subtitle">{{ usernameSubtitle }}</p>
-            </div>
-          </div>
-          <div class="navigation-discussion">
-            <ul>
-              <li v-for="(item, index) in navTop" :key="index">
-                <a href="/" class="discussion-link">
-                  <font-awesome-icon :icon="item.icon" class="icon-divider"/>
-                  <p>{{ item.title }}</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="flex-1"></div>
-          <div class="navigation-footer">
-            <ul>
-              <li v-for="(item, index) in navBottom" :key="index">
-                <a href="/" class="discussion-link">
-                  <font-awesome-icon :icon="item.icon" class="icon-divider"/>
-                  <p>{{ item.title }}</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </aside> -->
     <div class="container">
       <div class="tag">
         <div class="tag-card">
@@ -181,7 +133,9 @@ export default {
       cardTitle: 'Get the content you need by creating a personal feed'
     }
   },
-  
+  created () {
+      this.onResize()
+  },
   mounted() {
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize);
@@ -195,6 +149,7 @@ export default {
   },
   methods: {
     ...mapActions('navigation',['setIsNav']),
+    ...mapActions('desktop',['setIsDesktop']),
     setNav () {
       this.setIsNav(false)
       this.isSettingsOpen = false
@@ -205,7 +160,13 @@ export default {
     },
     onResize() {
       this.windowHeight = window.innerWidth
-      if (this.windowWidth >= 1024) this.setIsNav(true)
+      if (this.windowWidth >= 1024) { 
+        this.setIsNav(true)
+        this.setIsDesktop(true)
+      } else {
+        this.setIsNav(false)
+        this.setIsDesktop(false)
+      }
     }
   }
 }
@@ -271,28 +232,6 @@ export default {
     display: flex;
     margin-bottom: 2rem;
     justify-content: space-between;
-
-    &-user {
-      display: flex;
-      width: 6.5rem;
-      height: 3.2rem;
-      align-items: center;
-      border-radius: .8rem;
-      background-color: $background-secondary;
-
-      img {
-        width: 3.2rem;
-        height: 3.2rem;
-        border-radius: .8rem;
-      }
-    }
-
-    &-user-level {
-      color: $white;
-      font-weight: 700;
-      font-size: 1.5rem;
-      padding-left: .5rem; 
-    }
   }
 
   &-footer {

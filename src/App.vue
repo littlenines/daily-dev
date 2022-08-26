@@ -35,4 +35,27 @@ body {
     flex: 1;
   }
 }
+
+ .user {
+      display: flex;
+      width: 6.5rem;
+      height: 3.2rem;
+      align-items: center;
+      border-radius: .8rem;
+      background-color: $background-secondary;
+
+      .user-img {
+        width: 3.2rem;
+        height: 3.2rem;
+        border-radius: .8rem;
+      }
+      
+      .user-level {
+        color: $white;
+        font-weight: 700;
+        font-size: 1.5rem;
+        padding-left: .5rem; 
+      }
+    }
+
 </style>
