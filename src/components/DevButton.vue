@@ -6,7 +6,7 @@
     <font-awesome-icon  v-if="iconEnd" :icon="iconEnd" :size="iconSize" />
   </button>
   <!-- ICON -->
-  <div v-else class="btn-icon" @click="clickEvent">
+  <div v-else :class="['btn-icon',{back}]" @click="clickEvent">
     <button :class="['icon', variantIcon, size]" id="icon">
         <font-awesome-icon :icon="ico" :size="iconSize" />
     </button>
@@ -22,7 +22,7 @@ export default {
             type: String,
             default: 'default',
             validator: (value) => {
-                return ['default', 'success', 'warning', 'transparent'].indexOf(value) > -1
+                return ['default', 'success', 'warning', 'transparent','white'].indexOf(value) > -1
             }
         },
         iconStart: {
@@ -57,6 +57,10 @@ export default {
         },
         label: {
             type: String
+        },
+        back: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {
@@ -186,6 +190,11 @@ export default {
             height: 4.3rem;
             border-radius: 1.2rem;
         }
+
+        &.icon-white {
+            color: $black;
+            background-color: $white;
+        }
     }
 
     .label {
@@ -194,5 +203,11 @@ export default {
         line-height: 2rem;
         padding-left: .5rem;
     }
+}
+
+.back {
+    position: fixed;
+    bottom: 6rem;
+    right: 1.5rem;
 }
 </style>

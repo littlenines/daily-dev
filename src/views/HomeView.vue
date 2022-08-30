@@ -89,6 +89,12 @@
       </div>
       </div>
     </div>
+    <DevButton icon
+               :ico="faChevronUp"
+               :iconSize="largeTwo"
+               :size="'lg'"
+               :variant="'white'"
+               back />
   </main>
 </template>
 
@@ -124,6 +130,7 @@ export default {
       popularTitle: 'Popular',
       gear: 'fa-solid fa-gear',
       faPlus: "fa-solid fa-plus",
+      faChevronUp: "fa-solid fa-chevron-up",
       usernameTitle: 'Test Test',
       usernameSubtitle: '@ananas',
       cardButtonTitle: "Choose tags",
@@ -383,6 +390,9 @@ li {
     display: grid;
     grid-template-columns: repeat(2,minmax(0,1fr));
     gap: 32px;
+ }
+ @include xl {
+    grid-template-columns: repeat(3,minmax(0,1fr));
  }
 }
 

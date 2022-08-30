@@ -9,9 +9,16 @@
       @content;
     }
   }
+
+  @mixin xl {
+    @media (min-width: map-get($breakpoints,"xl")) {
+      @content;
+    }
+  }
   
   //VARIABLES
   $breakpoints: (
     "md": 656px,
     "lg": 1024px,
+    "xl": 1360px
   );

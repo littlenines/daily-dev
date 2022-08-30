@@ -28,6 +28,9 @@ body {
   @include md {
     max-width: 650px;
   }
+  @include xl {
+    max-width: 1024px;
+  }
 }
 
 .flex-1 {

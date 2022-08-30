@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="header-sm" v-if="!getDesktop">
+    <div class="header-sm">
       <DevButton icon
                 :ico="ico"
                 :iconSize="iconSize"
@@ -11,9 +11,9 @@
       </div>
       <font-awesome-icon icon="fa-solid fa-code" class="icon-color fa-2x" />
     </div>
-    <div class="header-md" v-else>
+    <div class="header-md">
       <div class="image-wrapper">
-        <img src="@/assets/logo.png" class="logo-image" alt="logo">
+        <img src="@/assets/logo-desktop.svg" class="logo-image" alt="logo">
       </div>
       <div class="user">
         <img class="user-img" src="/img/logo-card.webp" alt="logo">
@@ -67,7 +67,19 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
 
+    &-sm {
+      @include lg {
+        display: none;
+      }
+    
+    }
+    &-md {
+      display: none;
+      @include lg {
+        display: flex;
+      }
     }
   }
   
@@ -77,6 +89,9 @@ export default {
 
   .image-wrapper {
     max-width: 3.2rem;
+    @include lg {
+      max-width: 10rem;
+    }
 
     .logo-image {
       width: 100%;

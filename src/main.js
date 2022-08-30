@@ -13,6 +13,7 @@ import { faPlug } from '@fortawesome/free-solid-svg-icons'
 import { faLink } from '@fortawesome/free-solid-svg-icons'
 import { faTerminal } from '@fortawesome/free-solid-svg-icons'
 import { faAnglesUp } from '@fortawesome/free-solid-svg-icons'
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons'
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
@@ -39,6 +40,7 @@ library.add(faEye,
             faBookmark,
             faTerminal,
             faAnglesUp,
+            faChevronUp,
             faFileLines,
             faFloppyDisk,
             faSquarePlus,
