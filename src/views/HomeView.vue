@@ -75,16 +75,7 @@
 
       <div v-for="(card, index) in cards" :key="index" class="card-space">
         <a href="/"> 
-          <DevCard :image="card.image"
-                   :title="card.title"
-                   :date="card.date"
-                   :time="card.time"
-                   :hero="card.hero"
-                   :iconStart="card.iconStart"
-                   :iconMiddle="card.iconMiddle"
-                   :iconEnd="card.iconEnd"
-                   :promoted="card.promoted"
-                   :iconLabel="card.icoLabel" />
+          <DevCard :item="card" />
         </a>
       </div>
       </div>
