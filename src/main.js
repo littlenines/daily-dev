@@ -11,11 +11,13 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faGear } from '@fortawesome/free-solid-svg-icons'
 import { faPlug } from '@fortawesome/free-solid-svg-icons'
 import { faLink } from '@fortawesome/free-solid-svg-icons'
+import { faShapes } from '@fortawesome/free-solid-svg-icons'
 import { faTerminal } from '@fortawesome/free-solid-svg-icons'
 import { faAnglesUp } from '@fortawesome/free-solid-svg-icons'
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons'
 
@@ -36,6 +38,7 @@ library.add(faEye,
             faLink,
             faUser,
             faPlug,
+            faShapes,
             faMessage,
             faBookmark,
             faTerminal,
@@ -47,6 +50,7 @@ library.add(faEye,
             faCommentDots,
             faCirclePause,
             faUserAstronaut,
+            faMagnifyingGlass,
             faFireFlameCurved,
             faEllipsisVertical)
 

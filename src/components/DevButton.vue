@@ -1,16 +1,16 @@
 <template>
   <!-- BUTTON -->
-  <button v-if="!icon" :class="['btn', size, variantButton, { block }]" @click="clickEvent">
+  <button v-if="!icon" :class="['btn', 'primary-font', 'align-center', size, variantButton, { block }]" @click="clickEvent">
     <font-awesome-icon  v-if="iconStart" :icon="iconStart"  :size="iconSize"/>
     &ensp;<slot>Add</slot>&ensp;
     <font-awesome-icon  v-if="iconEnd" :icon="iconEnd" :size="iconSize" />
   </button>
   <!-- ICON -->
-  <div v-else :class="['btn-icon',{back}]" @click="clickEvent">
+  <div v-else :class="['btn-icon', 'align-center',{ back }]" @click="clickEvent">
     <button :class="['icon', variantIcon, size]" id="icon">
         <font-awesome-icon :icon="ico" :size="iconSize" />
     </button>
-    <label for="icon" v-if="label" :class="['label',variantLabel]">{{ label }}</label>
+    <label for="icon" v-if="label" :class="['label', 'primary-font', variantLabel]">{{ label }}</label>
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
         size: {
             type: String,
             default: 'sm',
-            validator: (value) => ['sm','md','lg'].indexOf(value) > -1
+            validator: (value) => ['sm','md','lg','xl'].indexOf(value) > -1
         },
         block: {
             type: Boolean,
@@ -85,11 +85,7 @@ export default {
 <style lang="scss" scoped>
 .btn {
     border: none;
-    display: flex;
     cursor: pointer;
-    font-weight: 700;
-    font-size: 1.5rem;
-    align-items: center;
 
     &.sm,
     &.md,
@@ -133,8 +129,6 @@ export default {
 }
 
 .btn-icon {
-    display: flex;
-    align-items: center;
     color: $label-tertiary;
 
     &:hover .icon-default {
@@ -150,6 +144,13 @@ export default {
     &:hover .icon-warning {
         color: $warning;
         background-color: $warning-hover;
+    }
+
+    &:hover .icon-fancy {
+        color: $button-default;
+        border-color: $button-default;
+        background-color: $fancy-background-hover;
+        box-shadow: $button-hover-shadow;
     }
 
     &:hover .label-default {
@@ -172,7 +173,8 @@ export default {
 
         &.sm,
         &.md,
-        &.lg {
+        &.lg,
+        &.xl {
             padding: 0;
             width: 3.2rem;
             height: 3.2rem;
@@ -191,23 +193,36 @@ export default {
             border-radius: 1.2rem;
         }
 
+        &.xl {
+            width: 6.5rem;
+            height: 6.5rem;
+            border-radius: 2rem;
+        }
+
         &.icon-white {
             color: $black;
             background-color: $white;
         }
+
+        &.icon-fancy {
+            color: $button-default;
+            background-color: $transparent;
+            border: 1px solid $button-default;
+        }
     }
 
     .label {
-        font-weight: 700;
-        font-size: 1.5rem;
-        line-height: 2rem;
         padding-left: .5rem;
     }
 }
 
 .back {
-    position: fixed;
     bottom: 6rem;
     right: 1.5rem;
+    position: fixed;
+
+    @include lg {
+        bottom: 3rem;
+    }
 }
 </style>

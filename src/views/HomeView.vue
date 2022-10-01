@@ -1,5 +1,6 @@
 <template>
-  <main class="main">
+  <main class="main" @scroll="handleScroll()">
+    <!-- phone and tablet sidenav -->
     <Transition name="fade">
       <aside class="overlay" v-if="getNav" @click.self="setNav">
         <nav class="navigation" @click.self="isSettingsOpen = false">
@@ -7,14 +8,22 @@
             <div class="navigation-header">
                 <div class="user">
                     <img class="user-img" src="/img/logo-card.webp" alt="logo">
-                    <p class="user-level">10</p>
+                    <p class="user-level primary-font text-white">10</p>
                 </div>
-              <DevButton icon :ico="gear" :iconSize="largeTwo" :size="medium" @click="openSettings"/>
+              <DevButton icon 
+                         :ico="gear" 
+                         :iconSize="largeTwo" 
+                         :size="medium" 
+                         @click="openSettings"
+              />
               <div class="navigation-modal" v-if="isSettingsOpen">
                 <ul>
                   <li v-for="(item, index) in settings" :key="index" class="modal-list">
                     <a href="/" class="modal-link">
-                      <font-awesome-icon :icon="item.icon" class="modal-divider" :size="large"/>
+                      <font-awesome-icon :icon="item.icon" 
+                                         class="modal-divider" 
+                                         :size="large"
+                      />
                       <p>{{ item.title }}</p>
                     </a>
                   </li>
@@ -22,7 +31,7 @@
               </div>
             </div>
             <div class="navigation-username">
-              <p class="navigation-username-title">{{ usernameTitle }}</p>
+              <p class="navigation-username-title primary-font text-white">{{ usernameTitle }}</p>
               <p class="navigation-username-subtitle">{{ usernameSubtitle }}</p>
             </div>
           </div>
@@ -50,24 +59,61 @@
         </nav>
       </aside>
     </Transition>
+    <!-- laptop and desktop sidenav -->
+    <aside class="overlay-md">
+        <nav class="navigation-md" @click.self="isSettingsOpen = false">
+          <div class="navigation-md-discussion">
+            <ul>
+              <li v-for="(item, index) in navTopDesktop" :key="index" :class="[!item.icon ? 'no-hover' : '']">
+                <a href="/" class="discussion-link" v-if="item.icon">
+                  <font-awesome-icon :icon="item.icon" class="icon-divider"/>
+                  <p>{{ item.title }}</p>
+                </a>
+                <span v-else class="discussion-tab">{{ item.title }}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="flex-1"></div>
+          <div class="navigation-md-footer">
+            <ul>
+              <li v-for="(item, index) in navBottom" :key="index">
+                <a href="/" class="discussion-link">
+                  <font-awesome-icon :icon="item.icon" class="icon-divider"/>
+                  <p>{{ item.title }}</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="level align-center">
+            <div class="level-image">
+              <img src="/img/bronze.png" alt="level">
+            </div>
+            <div class="level-info">
+              <span class="primary-font">Bronze</span>
+              <p>Next level: Silver</p>
+            </div>
+          </div>
+        </nav>
+      </aside>
+      <!-- sidenav end -->
     <div class="container">
       <div class="tag">
         <div class="tag-card">
-          <p class="tag-card-title">{{ cardTitle }}</p>
+          <p class="tag-card-title text-white">{{ cardTitle }}</p>
           <DevButton :iconStart="faPlus"
-                    :iconSize="large">
-                    {{ cardButtonTitle }}
+                     :iconSize="large">
+                      {{ cardButtonTitle }}
           </DevButton>
         </div>
       </div>
 
-      <div class="popular">
-        <h3 class="popular-title">{{ popularTitle }}</h3>
+      <div class="popular align-center">
+        <h3 class="popular-title text-white">{{ popularTitle }}</h3>
         <DevButton :iconEnd="faPlus"
                    :iconSize="large"
                    :size="medium"
                    :variant="transparentVariant">
-                   {{ transparentButtonTitle }}
+                    {{ transparentButtonTitle }}
         </DevButton>
       </div>
       
@@ -81,11 +127,13 @@
       </div>
     </div>
     <DevButton icon
+               back
+               :size="extraLarge"
                :ico="faChevronUp"
-               :iconSize="largeTwo"
-               :size="'lg'"
-               :variant="'white'"
-               back />
+               :iconSize="largeThree"
+               :variant="whiteVariant"
+               v-if="scroll >= 400"
+    />
   </main>
 </template>
 
@@ -96,6 +144,7 @@ import { mapActions, mapGetters } from 'vuex'
 import cards from '../../cards.json'
 import settings from '../../settings.json'
 import navTop from '../../navigation-top.json'
+import navTopDesktop from '../../navigation-top-md.json'
 import navBottom from '../../navigation-bottom.json'
 
 import DevCard from '@/components/DevCard.vue'
@@ -113,10 +162,15 @@ export default {
       navTop,
       settings,
       navBottom,
+      scroll: 0,
       large: 'lg',
       isNav: false,
       medium: 'md',
+      navTopDesktop,
       largeTwo: '2x',
+      largeThree: '3x',
+      extraLarge: 'xl',
+      whiteVariant: 'white',
       isSettingsOpen: false,
       popularTitle: 'Popular',
       gear: 'fa-solid fa-gear',
@@ -125,22 +179,21 @@ export default {
       usernameTitle: 'Test Test',
       usernameSubtitle: '@ananas',
       cardButtonTitle: "Choose tags",
-      windowWidth: window.innerWidth,
       transparentVariant: 'transparent',
       transparentButtonTitle: 'Add shortcuts',
       cardTitle: 'Get the content you need by creating a personal feed'
     }
   },
   created () {
-      this.onResize()
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  unmounted () {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   mounted() {
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize);
     })
-  },
-  beforeUnmount() { 
-    window.removeEventListener('resize', this.onResize); 
   },
   computed: {
     ...mapGetters('navigation', ['getNav'])
@@ -148,6 +201,10 @@ export default {
   methods: {
     ...mapActions('navigation',['setIsNav']),
     ...mapActions('desktop',['setIsDesktop']),
+
+    handleScroll () {
+      this.scroll = window.scrollY
+    },
     setNav () {
       this.setIsNav(false)
       this.isSettingsOpen = false
@@ -155,16 +212,6 @@ export default {
     openSettings () {
       if (this.isSettingsOpen === false) this.isSettingsOpen = true
       else this.isSettingsOpen = false
-    },
-    onResize() {
-      this.windowHeight = window.innerWidth
-      if (this.windowWidth >= 1024) { 
-        this.setIsNav(true)
-        this.setIsDesktop(true)
-      } else {
-        this.setIsNav(false)
-        this.setIsDesktop(false)
-      }
     }
   }
 }
@@ -180,6 +227,7 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   transform: translateX(-400px);
+
   @include md {
     transform: translateX(-800px);
   }
@@ -191,23 +239,42 @@ export default {
 
 .overlay {
   position: fixed;
+  inset: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
   cursor: pointer;
   background-color: $theme-overlay;
+
   @include lg {
-    width: 0;
-    height: 0;
-    right: unset;
-    width: unset;
-    height:unset;
-    top: 5.1rem;
-    background-color: unset;
+    display: none;
+  }
+}
+
+.overlay-md {
+  display: none;
+    @include lg {
+    display: block;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: 5rem;
+  }
+}
+
+.navigation-md {
+    width: 24rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid $divider;
+    border-right: 1px solid $divider;
+    background-color: $background-primary;
+
+  &-footer {
+    @include md {
+      padding: 1.5rem 0;
+    }
   }
 }
 
@@ -217,9 +284,11 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: $background-primary;
+
   @include lg {
     width: 24rem;
     border-right: 1px solid $divider;
+    border-top: 1px solid $divider;
   }
 
   &-wrapper {
@@ -240,10 +309,6 @@ export default {
 
   &-username {
     &-title {
-      color: $white;
-      font-weight: 700;
-      line-height: 2rem;
-      font-size: 1.5rem;
       margin-bottom: .2rem;
     }
 
@@ -269,6 +334,7 @@ export default {
 
 .navigation-discussion {
   margin-bottom: 4rem;
+
   @include md {
     margin-bottom: unset;
   }
@@ -277,6 +343,10 @@ export default {
 li {
   padding: 1.3rem;
 
+  @include lg {
+    padding: .8rem;
+  }
+
   &:hover {
     background-color: $background-active;
   }
@@ -284,7 +354,24 @@ li {
   &:hover .discussion-link {
     color: $white;
   }
+
 }
+
+.no-hover {
+  &:first-child {
+    margin-top: 2rem;
+  }
+  &:hover {
+    background-color: unset;
+  }
+}
+
+.discussion-tab {
+  margin-left: 1rem;
+  pointer-events: none;
+  color: $label-tertiary;
+  @include custom-font(700, 1.3rem);
+  }
 
 .modal-list{
   padding: .8rem 1rem;
@@ -302,8 +389,7 @@ li {
 }
 
 .modal-link {
-  font-size: 1.2rem;
-  font-weight: 600;
+  @include custom-font(600, 1.2rem);
 }
 
 .icon-divider {
@@ -317,17 +403,19 @@ li {
 
 .main {
   display: flex;
-  justify-content: center;
   padding: 0 2.4rem;
+  justify-content: center;
+
   @include lg {
-    margin: 0 0 0 24.5rem;
     padding: unset;
+    margin: 0 0 0 24.5rem;
   }
 }
 
 .tag {
   display: flex;
   justify-content: center;
+
   @include lg {
     margin-top: 8rem;
   }
@@ -342,18 +430,17 @@ li {
   justify-content: center;
   box-shadow: $default-shadow;
   border: 1px solid $button-default;
+
   @include md {
     align-items: center;
   }
 }
 
 .tag-card-title {
-  color: $white;
-  font-weight: 400;
-  font-size: 1.3rem;
   text-align: center;
-  line-height: 1.8rem;
   margin-bottom: 1rem;
+  @include custom-font(400, 1.3rem, 1.8rem);
+
   @include md {
     margin-bottom: unset;
     margin-right: 3.2rem;
@@ -361,36 +448,65 @@ li {
 }
 
 .popular {
-  display: flex;
-  align-items: center;
   margin-bottom: 3rem;
 }
 
 .popular-title {
   flex: 1;
-  color: $white;
-  font-weight: 700;
-  font-size: 1.7rem;
-  line-height: 2.4rem;
+  @include custom-font(700, 1.7rem, 2.4rem);
 }
 
 .cards {
+  margin-bottom: 3.2rem;
  @include md {
     width: 100%;
-    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(2,minmax(0,1fr));
     gap: 32px;
+    grid-template-columns: repeat(2,minmax(0,1fr));
  }
+
  @include xl {
     grid-template-columns: repeat(3,minmax(0,1fr));
+ }
+
+ @include xxl {
+    grid-template-columns: repeat(4,minmax(0,1fr));
  }
 }
 
 .card-space {
   margin-bottom: 3.2rem;
+
   @include md {
     margin-bottom: unset;
+  }
+}
+
+.level {
+  padding: 1rem;
+  border-radius: 1.2rem;
+  margin: 0 1.5rem 1.5rem;
+  border: 1px solid $level-2;
+  background-color: $background-secondary;
+
+  .level-image {
+    padding-right: 1rem;
+
+    img {
+      width: 4rem;
+    }
+  }
+
+  .level-info {
+    span {
+      color: $level-2;
+    }
+
+    p {
+      font-size: 1.3rem;
+      line-height: 1.8rem;
+      color: $label-tertiary;
+    }
   }
 }
 </style>

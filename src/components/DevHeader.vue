@@ -15,9 +15,16 @@
       <div class="image-wrapper">
         <img src="@/assets/logo-desktop.svg" class="logo-image" alt="logo">
       </div>
-      <div class="user">
-        <img class="user-img" src="/img/logo-card.webp" alt="logo">
-        <p class="user-level">10</p>
+      <div class="header-md-icons">
+        <DevButton icon 
+                  :ico="icoFeature"
+                  :variant="fancy"
+                  :iconSize="extraLarge"
+                  :size="medium" />
+        <div class="user">
+          <img class="user-img" src="/img/logo-card.webp" alt="logo">
+          <p class="user-level primary-font text-white">10</p>
+        </div>
       </div>
     </div>
   </header>
@@ -32,9 +39,13 @@ export default {
   },
   data () {
     return {
+      large: 'lg',
       medium: 'md',
+      fancy: 'fancy',
       iconSize: '2x',
-      ico: 'fa-solid fa-bars'
+      extraLarge: 'xl',
+      ico: 'fa-solid fa-bars',
+      icoFeature: 'fa-solid fa-shapes'
     }
   },
   computed: {
@@ -56,6 +67,7 @@ export default {
     margin-bottom: 4rem;
     border-bottom: 1px solid $divider;
     background-color: $background-primary;
+
     @include lg {
       width: 100%;
       position: fixed;
@@ -65,8 +77,8 @@ export default {
     &-sm,
     &-md {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
 
     &-sm {
@@ -77,10 +89,17 @@ export default {
     }
     &-md {
       display: none;
+
       @include lg {
         display: flex;
       }
     }
+  }
+
+  .header-md-icons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
   }
   
   .icon-color {
@@ -89,6 +108,7 @@ export default {
 
   .image-wrapper {
     max-width: 3.2rem;
+    
     @include lg {
       max-width: 10rem;
     }

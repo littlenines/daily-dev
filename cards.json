@@ -1,8 +1,53 @@
 [
     {
+        "image": "/img/cPlus.webp",
+        "title": "Upcoming C++ User Group meetings in October 2022 : Standard C++",
+        "date": "Today",
+        "time": "1m",
+        "hero": "/img/dev.webp",
+        "iconStart": "fa-solid fa-angles-up",
+        "iconMiddle": "fa-regular fa-message",
+        "iconEnd": "fa-regular fa-bookmark",
+        "promoted": false,
+        "icoLabel": ["", "", ""]
+    },
+    {
+        "image": "/img/logo-card.webp",
+        "title": "Enjoying daily.dev? Tweet to show your love ❤️",
+        "hero": "/img/dailyTwitter.jpg",
+        "iconStart": "fa-solid fa-angles-up",
+        "iconMiddle": "fa-regular fa-message",
+        "iconEnd": "fa-regular fa-bookmark",
+        "promoted": true
+    },
+    {
+        "image": "/img/awstip.jpg",
+        "title": "Manage EC2 with AWS Systems Manager without internet access",
+        "date": "Oct 01, 2022",
+        "time": "3m",
+        "hero": "/img/aws.webp",
+        "iconStart": "fa-solid fa-angles-up",
+        "iconMiddle": "fa-regular fa-message",
+        "iconEnd": "fa-regular fa-bookmark",
+        "promoted": false,
+        "icoLabel": ["", "", ""]
+    },
+    {
+        "image": "/img/community.webp",
+        "title": "Web Development Trends in 2023",
+        "date": "Sep 27, 2022",
+        "time": "15m",
+        "hero": "/img/web23.webp",
+        "iconStart": "fa-solid fa-angles-up",
+        "iconMiddle": "fa-regular fa-message",
+        "iconEnd": "fa-regular fa-bookmark",
+        "promoted": false,
+        "icoLabel": ["173", "7", ""]
+    },
+    {
         "image": "/img/codemotion.webp",
         "title": "Will Bun replace Deno as Node.JS killer?",
-        "date": "Today",
+        "date": "Jul 30, 2022",
         "time": "6m",
         "hero": "/img/deno.webp",
         "iconStart": "fa-solid fa-angles-up",

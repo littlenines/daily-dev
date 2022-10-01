@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div v-if="!item.promoted" class="card-header">
+    <div v-if="!item.promoted" class="card-header align-center">
       <slot name="header">
         <a href="/">
           <img :src="item.image" alt="logo" />
@@ -13,12 +13,12 @@
     </div>
     <div class="card-info">
       <slot name="info">
-        <h3 class="card-info-title">{{ item.title }}</h3>
+        <h3 class="card-info-title text-white">{{ item.title }}</h3>
       </slot>
     </div>
     <div class="flex-1"></div>
     <div class="card-info">
-      <p v-if="date" class="card-info-subtitle">
+      <p v-if="item.date" class="card-info-subtitle">
         {{ item.date }} &bullet; {{ item.time }} read time
       </p>
     </div>
@@ -99,19 +99,14 @@ export default {
   }
 
   &-info-title {
-    color: $white;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 2.6rem;
     word-break: break-word;
+    @include custom-font(700, 2rem, 2.6rem);
   }
 }
 
 .card-header {
-  display: flex;
   margin: 0.8rem 0;
   padding: 0 1.6rem;
-  align-items: center;
   justify-content: space-between;
 
   img {
@@ -134,7 +129,7 @@ export default {
   line-height: 1.8rem;
   margin-bottom: 3.2rem;
   color: $label-tertiary;
-  
+
   @include md {
     margin-bottom: unset;
   }
