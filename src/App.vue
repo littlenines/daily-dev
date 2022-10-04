@@ -69,4 +69,15 @@ body {
   align-items: center;
 }
 
+::-webkit-scrollbar {
+  width: .8rem;
+  height: .8rem;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $label-tertiary;
+  border-radius: .5rem;
+  height: 20px;
+}
 </style>
