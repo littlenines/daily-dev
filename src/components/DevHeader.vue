@@ -13,7 +13,9 @@
     </div>
     <div class="header-md">
       <div class="image-wrapper">
+      <DevTooltip :label="homeLabel" position="right" size="sm">
         <img src="@/assets/logo-desktop.svg" class="logo-image" alt="logo">
+      </DevTooltip>
       </div>
       <div class="header-md-icons">
         <DevButton icon 
@@ -21,10 +23,12 @@
                   :variant="fancy"
                   :iconSize="extraLarge"
                   :size="medium" />
+        <DevTooltip :label="settingsLabel" position="left" size="md">
         <div class="user">
           <img class="user-img" src="/img/logo-card.webp" alt="logo">
           <p class="user-level primary-font text-white">10</p>
         </div>
+        </DevTooltip>
       </div>
     </div>
   </header>
@@ -32,9 +36,11 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import DevTooltip from '@/components/DevTooltip.vue'
 import DevButton from '@/components/DevButton.vue'
 export default {
   components: {
+    DevTooltip,
     DevButton
   },
   data () {
@@ -44,8 +50,10 @@ export default {
       fancy: 'fancy',
       iconSize: '2x',
       extraLarge: 'xl',
+      homeLabel: 'Home',
       ico: 'fa-solid fa-bars',
-      icoFeature: 'fa-solid fa-shapes'
+      settingsLabel: 'Profile settings',
+      icoFeature: 'fa-solid fa-wand-sparkles'
     }
   },
   computed: {
@@ -116,5 +124,9 @@ export default {
     .logo-image {
       width: 100%;
     }
+  }
+
+  .tooltip::v-deep .tooltiptext.right {
+    top: -0.1rem;
   }
 </style>
