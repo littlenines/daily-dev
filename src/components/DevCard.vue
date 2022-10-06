@@ -5,10 +5,12 @@
         <a href="/">
           <img :src="item.image" alt="logo" />
         </a>
-        <DevButton icon
-                   :ico="ico" 
-                   :iconSize="size"
-        />
+        <DevTooltip :label="options" position="top" size="sm">
+          <DevButton icon
+                    :ico="ico" 
+                    :iconSize="size"
+          />
+        </DevTooltip>
       </slot>
     </div>
     <div class="card-info">
@@ -27,24 +29,30 @@
     </div>
     <div v-if="!item.promoted" class="card-footer">
       <slot name="footer">
-        <DevButton icon
-                   :ico="item.iconStart"
-                   :iconSize="size"
-                   :variant="success"
-                   :label="item.icoLabel[0]"
-        />
-        <DevButton icon
-                   :ico="item.iconMiddle"
-                   :iconSize="size"
-                   :variant="success"
-                   :label="item.icoLabel[1]"
-        />
-        <DevButton icon
-                   :ico="item.iconEnd"
-                   :iconSize="size"
-                   :variant="warning"
-                   :label="item.icoLabel[2]"
-        />
+        <DevTooltip :label="upvote" position="top" size="sm">
+          <DevButton icon
+                    :ico="item.iconStart"
+                    :iconSize="size"
+                    :variant="success"
+                    :label="item.icoLabel[0]"
+          />
+        </DevTooltip>
+        <DevTooltip :label="comment" position="top" size="sm">
+          <DevButton icon
+                    :ico="item.iconMiddle"
+                    :iconSize="size"
+                    :variant="success"
+                    :label="item.icoLabel[1]"
+          />
+        </DevTooltip>
+        <DevTooltip :label="bookmark" position="top" size="sm">
+          <DevButton icon
+                    :ico="item.iconEnd"
+                    :iconSize="size"
+                    :variant="warning"
+                    :label="item.icoLabel[2]"
+          />
+        </DevTooltip>
       </slot>
     </div>
     <div v-else class="card-promoted">
@@ -54,10 +62,12 @@
 </template>
 
 <script>
+import DevTooltip from '@/components/DevTooltip.vue'
 import DevButton from "@/components/DevButton.vue";
 export default {
   components: {
     DevButton,
+    DevTooltip
   },
   props: {
     ico: {
@@ -71,8 +81,12 @@ export default {
   data() {
     return {
       size: "2x",
+      upvote: "Upvote",
       success: "success",
       warning: "warning",
+      options: "Options",
+      comment: "Comments",
+      bookmark: "Bookmark",
       promotedTitle: "Promoted",
     };
   },
@@ -120,7 +134,7 @@ export default {
   padding: 0 1.6rem;
 
   &-title {
-    margin-bottom: 0.8rem;
+    margin: 0.8rem 0;
   }
 }
 

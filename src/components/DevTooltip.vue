@@ -43,7 +43,6 @@ export default {
 }
 
 .tooltip .tooltiptext {
-  top: .4rem;
   z-index: 1;
   color: $black;
   padding: .7rem 0;
@@ -58,7 +57,6 @@ export default {
 .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
-  top: 50%;
   margin-top: -5px;
   border-width: 5px;
   border-style: solid;
@@ -68,21 +66,38 @@ export default {
 }
 
 .left {
+    top: .4rem;
     right: 110%;
 }
 
 .left::after {
+    top: 50%;
     left: 99%;
     border-color: transparent transparent transparent $white;
 }
 
 .right {
+    top: -0.1rem;
     left: 110%;
 }
 
 .right::after {
+    top: 50%;
     right: 99%;
     border-color: transparent $white transparent transparent;
+}
+
+.top {
+    top: -3rem;
+    bottom: 150%;
+    display: inline-table;
+    transform: translate(-30%);
+}
+
+.top::after {
+    top: 119%;
+    left: 50%;
+    border-color: $white transparent transparent transparent;
 }
 
 .sm {

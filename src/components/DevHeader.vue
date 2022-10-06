@@ -126,7 +126,7 @@ export default {
     }
   }
 
-  .tooltip::v-deep .tooltiptext.right {
-    top: -0.1rem;
-  }
+  // .tooltip:deep(.tooltiptext.right) {
+  //   top: -0.1rem;
+  // }
 </style>
