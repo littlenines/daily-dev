@@ -61,6 +61,7 @@ export default {
   border-width: .5rem;
   border-style: solid;
 }
+
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
