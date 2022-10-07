@@ -2,15 +2,16 @@
   <DevHeader />
   <router-view />
 </template>
+
 <script>
 import DevHeader from '@/components/DevHeader.vue'
 export default {
   components: {
     DevHeader
   }
-  
 }
 </script>
+
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
 html {
@@ -36,6 +37,14 @@ body {
 
   @include xxl {
     max-width: 1370px;
+  }
+
+  @include xxxl {
+    max-width: 1600px;
+  }
+
+  @include k4 {
+    max-width: 1900px;
   }
 }
 

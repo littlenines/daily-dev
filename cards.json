@@ -1,5 +1,6 @@
 [
     {
+        "imageAlt": "C++",
         "image": "/img/cPlus.webp",
         "title": "Upcoming C++ User Group meetings in October 2022 : Standard C++",
         "date": "Today",
@@ -21,6 +22,7 @@
         "promoted": true
     },
     {
+        "imageAlt": "AWS Tip",
         "image": "/img/awstip.jpg",
         "title": "Manage EC2 with AWS Systems Manager without internet access",
         "date": "Oct 01, 2022",
@@ -33,6 +35,7 @@
         "icoLabel": ["", "", ""]
     },
     {
+        "imageAlt": "Community Picks",
         "image": "/img/community.webp",
         "title": "Web Development Trends in 2023",
         "date": "Sep 27, 2022",
@@ -45,6 +48,7 @@
         "icoLabel": ["173", "7", ""]
     },
     {
+        "imageAlt": "Codemotion",
         "image": "/img/codemotion.webp",
         "title": "Will Bun replace Deno as Node.JS killer?",
         "date": "Jul 30, 2022",
@@ -57,6 +61,7 @@
         "icoLabel": ["", "", ""]
     },
     {
+        "imageAlt": "Better Programming",
         "image": "/img/better.webp",
         "title": "How to Use Kotlin Symbol Processors on Android",
         "date": "Jul 29, 2022",
@@ -78,6 +83,7 @@
         "promoted": true
     },
     {
+        "imageAlt": "Wunder Graph",
         "image": "/img/wunder.webp",
         "title": "Why not use GraphQL?",
         "date": "Jul 28, 2022",

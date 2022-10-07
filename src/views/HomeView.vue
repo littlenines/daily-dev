@@ -61,7 +61,15 @@
     </Transition>
     <!-- laptop and desktop sidenav -->
     <aside class="overlay-md">
-        <nav class="navigation-md" @click.self="isSettingsOpen = false">
+        <nav class="navigation-md">
+          <div class="navigation-md-hover-btn">
+            <DevButton icon
+                       :size="small"
+                       :iconSize="large"
+                       :ico="faChevronLeft"
+                       :variant="whiteVariant"
+            />
+          </div>
           <div class="navigation-md-discussion">
             <ul>
               <li v-for="(item, index) in navTopDesktop" :key="index" :class="[!item.icon ? 'no-hover' : '']">
@@ -89,8 +97,8 @@
               <img src="/img/bronze.png" alt="level">
             </div>
             <div class="level-info">
-              <span class="primary-font">Bronze</span>
-              <p>Next level: Silver</p>
+              <span class="primary-font">{{ levelTitle }}</span>
+              <p>Next level: {{ levelNext }}</p>
             </div>
           </div>
         </nav>
@@ -118,22 +126,34 @@
       </div>
       
       <div class="cards">
-
-      <div v-for="(card, index) in cards" :key="index" class="card-space">
-        <a href="/"> 
-          <DevCard :item="card" />
-        </a>
-      </div>
+        <div v-for="(card, index) in cards" :key="index" class="card-space">
+          <a href="/"> 
+            <DevCard :item="card" />
+          </a>
+        </div>
       </div>
     </div>
-    <DevButton icon
+
+    <div class="back-button">
+      <DevButton icon
+                back
+                :size="extraLarge"
+                :ico="faChevronUp"
+                :iconSize="largeThree"
+                :variant="whiteVariant"
+                v-if="scroll >= 400"
+      />
+    </div>
+    <div class="back-button-phone">
+      <DevButton icon
                back
-               :size="extraLarge"
+               :size="large"
                :ico="faChevronUp"
-               :iconSize="largeThree"
+               :iconSize="largeTwo"
                :variant="whiteVariant"
                v-if="scroll >= 400"
-    />
+      />
+    </div>
   </main>
 </template>
 
@@ -163,6 +183,7 @@ export default {
       settings,
       navBottom,
       scroll: 0,
+      small: 'sm',
       large: 'lg',
       isNav: false,
       medium: 'md',
@@ -170,17 +191,20 @@ export default {
       largeTwo: '2x',
       largeThree: '3x',
       extraLarge: 'xl',
+      levelNext: 'Silver',
+      levelTitle: 'Bronze',
       whiteVariant: 'white',
       isSettingsOpen: false,
       popularTitle: 'Popular',
       gear: 'fa-solid fa-gear',
       faPlus: "fa-solid fa-plus",
-      faChevronUp: "fa-solid fa-chevron-up",
       usernameTitle: 'Test Test',
       usernameSubtitle: '@ananas',
       cardButtonTitle: "Choose tags",
       transparentVariant: 'transparent',
+      faChevronUp: "fa-solid fa-chevron-up",
       transparentButtonTitle: 'Add shortcuts',
+      faChevronLeft: "fa-solid fa-chevron-left",
       cardTitle: 'Get the content you need by creating a personal feed'
     }
   },
@@ -190,25 +214,21 @@ export default {
   unmounted () {
     window.removeEventListener('scroll', this.handleScroll);
   },
-  mounted() {
-    this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize);
-    })
-  },
   computed: {
     ...mapGetters('navigation', ['getNav'])
   },
   methods: {
     ...mapActions('navigation',['setIsNav']),
-    ...mapActions('desktop',['setIsDesktop']),
 
     handleScroll () {
       this.scroll = window.scrollY
     },
+  
     setNav () {
       this.setIsNav(false)
       this.isSettingsOpen = false
     },
+
     openSettings () {
       if (this.isSettingsOpen === false) this.isSettingsOpen = true
       else this.isSettingsOpen = false
@@ -253,6 +273,7 @@ export default {
 
 .overlay-md {
   display: none;
+
     @include lg {
     display: block;
     position: fixed;
@@ -271,11 +292,22 @@ export default {
     border-right: 1px solid $divider;
     background-color: $background-primary;
 
+  &:hover .navigation-md-hover-btn {
+    display: block;
+  }
+
   &-footer {
     @include md {
       padding: 1.5rem 0;
     }
   }
+}
+
+.navigation-md-hover-btn {
+  position: absolute;
+  top: 1rem;
+  left: 22.5rem;
+  display: none;
 }
 
 .navigation {
@@ -287,8 +319,8 @@ export default {
 
   @include lg {
     width: 24rem;
-    border-right: 1px solid $divider;
     border-top: 1px solid $divider;
+    border-right: 1px solid $divider;
   }
 
   &-wrapper {
@@ -472,6 +504,14 @@ li {
  @include xxl {
     grid-template-columns: repeat(4,minmax(0,1fr));
  }
+
+ @include xxxl {
+    grid-template-columns: repeat(5,minmax(0,1fr));
+ }
+
+ @include k4 {
+    grid-template-columns: repeat(6,minmax(0,1fr));
+ }
 }
 
 .card-space {
@@ -484,6 +524,7 @@ li {
 
 .level {
   padding: 1rem;
+  cursor: pointer;
   border-radius: 1.2rem;
   margin: 0 1.5rem 1.5rem;
   border: 1px solid $level-2;
@@ -507,6 +548,20 @@ li {
       line-height: 1.8rem;
       color: $label-tertiary;
     }
+  }
+}
+
+.back-button {
+  display: none;
+  
+  @include lg {
+    display: block;
+  }
+}
+
+.back-button-phone {
+  @include lg {
+    display: none;
   }
 }
 </style>

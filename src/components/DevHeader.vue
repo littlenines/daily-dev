@@ -2,10 +2,10 @@
   <header class="header">
     <div class="header-sm">
       <DevButton icon
-                :ico="ico"
-                :iconSize="iconSize"
-                :size="medium"
-                @click="openNav"/>
+                 :ico="ico"
+                 :size="medium"
+                 @click="openNav"
+                 :iconSize="iconSize" />
       <div class="image-wrapper">
         <img src="@/assets/logo.png" class="logo-image" alt="logo">
       </div>
@@ -13,21 +13,23 @@
     </div>
     <div class="header-md">
       <div class="image-wrapper">
-      <DevTooltip :label="homeLabel" position="right" size="sm">
+      <DevTooltip :size="small"
+                  position="right"
+                  :label="homeLabel">
         <img src="@/assets/logo-desktop.svg" class="logo-image" alt="logo">
       </DevTooltip>
       </div>
       <div class="header-md-icons">
         <DevButton icon 
-                  :ico="icoFeature"
-                  :variant="fancy"
-                  :iconSize="extraLarge"
-                  :size="medium" />
-        <DevTooltip :label="settingsLabel" position="left" size="md">
-        <div class="user">
-          <img class="user-img" src="/img/logo-card.webp" alt="logo">
-          <p class="user-level primary-font text-white">10</p>
-        </div>
+                   :ico="icoFeature"
+                   :variant="fancy"
+                   :iconSize="extraLarge"
+                   :size="medium" />
+        <DevTooltip :label="settingsLabel" position="left" :size="medium">
+          <div class="user">
+            <img class="user-img" src="/img/logo-card.webp" alt="logo">
+            <p class="user-level primary-font text-white">10</p>
+          </div>
         </DevTooltip>
       </div>
     </div>
@@ -35,7 +37,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 import DevTooltip from '@/components/DevTooltip.vue'
 import DevButton from '@/components/DevButton.vue'
 export default {
@@ -45,6 +47,7 @@ export default {
   },
   data () {
     return {
+      small: 'sm',
       large: 'lg',
       medium: 'md',
       fancy: 'fancy',
@@ -56,9 +59,7 @@ export default {
       icoFeature: 'fa-solid fa-wand-sparkles'
     }
   },
-  computed: {
-    ...mapGetters('desktop', ['getDesktop'])
-  },
+
   methods: {
     ...mapActions('navigation',['setIsNav']),
 
@@ -71,6 +72,7 @@ export default {
 
 <style lang='scss' scoped>
   .header {
+    z-index: 1;
     padding: .5rem 2rem;
     margin-bottom: 4rem;
     border-bottom: 1px solid $divider;
@@ -106,8 +108,8 @@ export default {
 
   .header-md-icons {
     display: flex;
-    align-items: center;
     gap: 1.5rem;
+    align-items: center;
   }
   
   .icon-color {
@@ -125,8 +127,4 @@ export default {
       width: 100%;
     }
   }
-
-  // .tooltip:deep(.tooltiptext.right) {
-  //   top: -0.1rem;
-  // }
 </style>

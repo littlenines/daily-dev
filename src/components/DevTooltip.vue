@@ -57,8 +57,8 @@ export default {
 .tooltip .tooltiptext::after {
   content: "";
   position: absolute;
-  margin-top: -5px;
-  border-width: 5px;
+  margin-top: -.5rem;
+  border-width: .5rem;
   border-style: solid;
 }
 .tooltip:hover .tooltiptext {
@@ -77,8 +77,8 @@ export default {
 }
 
 .right {
-    top: -0.1rem;
     left: 110%;
+    top: -0.1rem;
 }
 
 .right::after {
@@ -91,13 +91,24 @@ export default {
     top: -3rem;
     bottom: 150%;
     display: inline-table;
-    transform: translate(-30%);
+    transform: translate(-25%);
 }
 
 .top::after {
     top: 119%;
-    left: 50%;
+    left: 45%;
     border-color: $white transparent transparent transparent;
+}
+
+.bottom {
+    top: 4rem;
+    left: -100%;
+}
+
+.bottom::after {
+    left: 45%;
+    bottom: 99%;
+    border-color: transparent transparent $white transparent;
 }
 
 .sm {

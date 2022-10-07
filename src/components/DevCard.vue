@@ -2,9 +2,12 @@
   <div class="card">
     <div v-if="!item.promoted" class="card-header align-center">
       <slot name="header">
-        <a href="/">
-          <img :src="item.image" alt="logo" />
-        </a>
+        <DevTooltip :label="item.imageAlt" position="bottom" size="md">
+          <a href="/">
+            <img :src="item.image" alt="logo" />
+          </a>
+        </DevTooltip>
+
         <DevTooltip :label="options" position="top" size="sm">
           <DevButton icon
                     :ico="ico" 
@@ -29,7 +32,7 @@
     </div>
     <div v-if="!item.promoted" class="card-footer">
       <slot name="footer">
-        <DevTooltip :label="upvote" position="top" size="sm">
+        <DevTooltip :label="upvote" position="top" :size="small">
           <DevButton icon
                     :ico="item.iconStart"
                     :iconSize="size"
@@ -37,20 +40,22 @@
                     :label="item.icoLabel[0]"
           />
         </DevTooltip>
-        <DevTooltip :label="comment" position="top" size="sm">
+
+        <DevTooltip :label="comment" position="top" :size="small">
           <DevButton icon
-                    :ico="item.iconMiddle"
-                    :iconSize="size"
-                    :variant="success"
-                    :label="item.icoLabel[1]"
+                     :ico="item.iconMiddle"
+                     :iconSize="size"
+                     :variant="success"
+                     :label="item.icoLabel[1]"
           />
         </DevTooltip>
-        <DevTooltip :label="bookmark" position="top" size="sm">
+
+        <DevTooltip :label="bookmark" position="top" :size="small">
           <DevButton icon
-                    :ico="item.iconEnd"
-                    :iconSize="size"
-                    :variant="warning"
-                    :label="item.icoLabel[2]"
+                     :ico="item.iconEnd"
+                     :iconSize="size"
+                     :variant="warning"
+                     :label="item.icoLabel[2]"
           />
         </DevTooltip>
       </slot>
@@ -81,6 +86,7 @@ export default {
   data() {
     return {
       size: "2x",
+      small: 'sm',
       upvote: "Upvote",
       success: "success",
       warning: "warning",

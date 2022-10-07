@@ -22,7 +22,7 @@ export default {
             type: String,
             default: 'default',
             validator: (value) => {
-                return ['default', 'success', 'warning', 'transparent','white'].indexOf(value) > -1
+                return ['default', 'success', 'warning', 'transparent','white', 'fancy'].indexOf(value) > -1
             }
         },
         iconStart: {
@@ -35,7 +35,7 @@ export default {
             type: String,
             default: 'sm',
             validator: (value) => {
-                const fontSizes = ['xs','sm', 'md', 'lg', '2x', '3x', '5x','7x', '10x']
+                const fontSizes = ['xs','sm', 'md', 'lg', 'xl', '2x', '3x', '5x','7x', '10x']
                 return fontSizes.indexOf(value) > -1
             }
         },
@@ -149,8 +149,8 @@ export default {
     &:hover .icon-fancy {
         color: $button-default;
         border-color: $button-default;
-        background-color: $fancy-background-hover;
         box-shadow: $button-hover-shadow;
+        background-color: $fancy-background-hover;
     }
 
     &:hover .label-default {

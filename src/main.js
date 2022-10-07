@@ -15,6 +15,7 @@ import { faTerminal } from '@fortawesome/free-solid-svg-icons'
 import { faAnglesUp } from '@fortawesome/free-solid-svg-icons'
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { faWandSparkles } from '@fortawesome/free-solid-svg-icons'
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
@@ -47,6 +48,7 @@ library.add(faEye,
             faFloppyDisk,
             faSquarePlus,
             faCommentDots,
+            faChevronLeft,
             faCirclePause,
             faWandSparkles,
             faUserAstronaut,
